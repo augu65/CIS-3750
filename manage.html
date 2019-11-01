@@ -45,11 +45,21 @@
         </nav> 
         <!-- NAVBAR // END -->
 
+        <!-- FLOATING ACTION BUTTON -->
+        <button id="create-btn" type="button" class="btn btn-secondary shadow"><img src="images/plus.svg"/></button>
+
         <!-- MAIN LIST CONTENT -->
         <div class="container border border-secondary rounded">
-
             <h1 id="users-heading">Registered Users</h1>
             <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">Admin</h5>
+                        <div class="btn-group pull-right" role="group" aria-label="user-options">
+                            <button type="button" class="tick-update btn btn-outline-secondary">Update</button>
+                        </div>
+                    </div>
+                </a>
                 <a href="#" class="list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">Bob Star</h5>
@@ -111,6 +121,10 @@
 
             $('.tick-update').on('click', function(e){
                 window.location.href = "update.html";
+            });
+
+            $('#create-btn').on('click', function(e){
+                window.location.href="create.html";
             });
         </script>
     </body>
