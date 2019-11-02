@@ -127,7 +127,7 @@
                         <h5 class="modal-title" id="aysModalLabel">Are you sure?</h5>
                     </div>
                     <div class="modal-body">
-                        <h5>Deleting a user is irreversible, are you sure you would like to continue?</h5>
+                        <h5 id="aysModalBody">Deleting a user is irreversible, are you sure you would like to continue?</h5>
                     </div>
                     <div class="modal-footer">
                         <button id="aysModalYesBtn" type="button" class="btn btn-primary">Yes</button>
@@ -145,24 +145,20 @@
         <!-- CUSTOM DYNAMIC UI FUNCTIONALITY -->
         <script>
             let curUser = null;
-            // Call on document required for deletion of dynamic users
+            
+            // Delete user btn clicked
             $(document).on('click', '.tick-delete', function(e){
+                // Set AYS delete message
+                $('#aysModalBody').text("Deleting a user is irreversible, are you sure you would like to continue?");
                 $('#aysModal').modal();
                 curUser = $(this).closest('a');
             });
 
-            $('#aysModalYesBtn').on('click', function(e){
-                $("#aysModal").modal('hide');
-                if(curUser != null){
-                    curUser.remove(); 
-                }
-            });
-
+            // Update user btn clicked
             $('.tick-update').on('click', function(e){
                 curUser = $(this).closest('a');
                
                 // If updating admin user, redirect to profile.html
-                console.log(curUser.find('h5').text());
                 if(curUser.find('h5').text() == "Admin"){
                     window.location.href = "profile.html";
                 }
@@ -180,6 +176,7 @@
                 $("#cuModal").modal();
             });
 
+            // Create new user btn clicked
             $('#create-btn').on('click', function(e){
                 curUser = $(this).closest('a');
                 // Setup "Create User" Modal
@@ -192,18 +189,25 @@
                 $('#cuModal').modal();
             });
 
-            // "Save Changes" clicked
+            // Shortcut "Save Changes" with <RETURN> press in email textfield
+            $('#cuEmail').keyup(function(e){
+                if(e.keyCode == 13){
+                    $('#cuModalYesBtn').click();
+                }
+            });
+
+            // Update/Create Modal "Save Changes" clicked
             $('#cuModalYesBtn').on('click', function(e){
                 let modalTitle = $('#cuModalLabel').text();
 
                 if(modalTitle == "Update User"){
-                    curUser.find('h5').text($('#cuName').val());      
-                    curUser.find('small').text($('#cuEmail').val());
+                    $('#aysModalBody').text("This action will change the user's account info, are you sure you would like to continue?");
+                    $('#aysModal').modal();
                 }else{ // Create User
                     // Clone existing user
                     let new_user = $('.list-group-item:last').clone(true);
 
-                    // Ensure tick-delete class exists
+                    // Ensure tick-delete class exists, otherwise add delete btn to list item
                     if(!new_user.find('.tick-delete').length){
                         new_user.find('.btn-group').append('<button type="button" class="tick-delete btn btn-outline-secondary"><img src="images/trash.svg"/></button>');
                     }
@@ -216,6 +220,20 @@
 
                 // Close modal
                 $('#cuModal').modal('hide');
+            });
+
+            // "Are you sure?" Yes btn clicked
+            $('#aysModalYesBtn').on('click', function(e){
+                $("#aysModal").modal('hide');
+                let aysBody = $('#aysModalBody').text();
+                if(curUser != null){
+                    if(aysBody.includes('Deleting')){ // AYS for Deletion
+                        curUser.remove(); 
+                    }else{ // AYS for update
+                        curUser.find('h5').text($('#cuName').val());
+                        curUser.find('small').text($('#cuEmail').val());
+                    }
+                }
             });
         </script>
     </body>
