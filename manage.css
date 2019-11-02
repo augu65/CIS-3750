@@ -23,3 +23,7 @@ body > .container{
 #users-heading{
     padding: 4px;
 }
+
+#user_avatar{
+    margin: 10px 0;
+}

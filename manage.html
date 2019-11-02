@@ -54,7 +54,10 @@
             <div class="list-group">
                 <a href="#" class="list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">Admin</h5>
+                        <div>
+                            <h5 class="mb-1">Admin</h5>
+                            <small class="text-muted">admin@wdgpublichealth.ca</small>
+                        </div>
                         <div class="btn-group pull-right" role="group" aria-label="user-options">
                             <button type="button" class="tick-update btn btn-outline-secondary">Update</button>
                         </div>
@@ -62,7 +65,10 @@
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">Bob Star</h5>
+                        <div>
+                            <h5 class="mb-1">Bob Star</h5>
+                            <small class="text-muted">bob.star@wdgpublichealth.ca</small>
+                        </div>
                         <div class="btn-group pull-right" role="group" aria-label="user-options">
                             <button type="button" class="tick-update btn btn-outline-secondary">Update</button>
                             <button type="button" class="tick-delete btn btn-outline-secondary"><img src="images/trash.svg"/></button>
@@ -71,13 +77,45 @@
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">Tom Scott</h5>
+                        <div>
+                            <h5 class="mb-1">Sam Jones</h5>
+                            <small class="text-muted">sam.jones@wdgpublichealth.ca</small>
+                        </div>
                         <div class="btn-group pull-right" role="group" aria-label="user-options">
                             <button type="button" class="tick-update btn btn-outline-secondary">Update</button>
                             <button type="button" class="tick-delete btn btn-outline-secondary"><img src="images/trash.svg"/></button>
                         </div>
                     </div>
                 </a>
+            </div>
+        </div>
+
+        <!-- Create/Update Modal -->
+        <div class="modal fade" id="cuModal" tabindex="-1" role="dialog" aria-labelledby="cuModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="cuModalLabel">Update User</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img id="user_avatar" class="border" src="images/placeholder_64.svg"/>
+                        <form>
+                            <div class="form-group">
+                                <input id="cuName" type="text" class="form-control" placeholder="Name"/>
+                            </div>
+                            <div class="form-group">
+                                <input id="cuEmail" type="email" class="form-control" placeholder="Email"/>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="cuModalYesBtn" type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -106,25 +144,78 @@
 
         <!-- CUSTOM DYNAMIC UI FUNCTIONALITY -->
         <script>
-            let curTickDelete = null;
-            $('.tick-delete').on('click', function(e){
+            let curUser = null;
+            // Call on document required for deletion of dynamic users
+            $(document).on('click', '.tick-delete', function(e){
                 $('#aysModal').modal();
-                curTickDelete = $(this).closest('a');
+                curUser = $(this).closest('a');
             });
 
             $('#aysModalYesBtn').on('click', function(e){
                 $("#aysModal").modal('hide');
-                if(curTickDelete != null){
-                    curTickDelete.remove(); 
+                if(curUser != null){
+                    curUser.remove(); 
                 }
             });
 
             $('.tick-update').on('click', function(e){
-                window.location.href = "update.html";
+                curUser = $(this).closest('a');
+               
+                // If updating admin user, redirect to profile.html
+                console.log(curUser.find('h5').text());
+                if(curUser.find('h5').text() == "Admin"){
+                    window.location.href = "profile.html";
+                }
+
+                // Setup "Update User" Modal
+                $("#cuModalLabel").text("Update User");
+                if(curUser != null){
+                    let curUserName = curUser.find("h5").text();
+                    let curUserEmail = curUser.find("small").text();
+                    $('#cuName').val(curUserName);
+                    $('#cuEmail').val(curUserEmail);
+                }
+
+                // Display Modal
+                $("#cuModal").modal();
             });
 
             $('#create-btn').on('click', function(e){
-                window.location.href="create.html";
+                curUser = $(this).closest('a');
+                // Setup "Create User" Modal
+                $('#cuModalLabel').text("Create User");
+                $('#cuName').val("");
+                $('#cuEmail').val("");
+
+
+                // Display Modal
+                $('#cuModal').modal();
+            });
+
+            // "Save Changes" clicked
+            $('#cuModalYesBtn').on('click', function(e){
+                let modalTitle = $('#cuModalLabel').text();
+
+                if(modalTitle == "Update User"){
+                    curUser.find('h5').text($('#cuName').val());      
+                    curUser.find('small').text($('#cuEmail').val());
+                }else{ // Create User
+                    // Clone existing user
+                    let new_user = $('.list-group-item:last').clone(true);
+
+                    // Ensure tick-delete class exists
+                    if(!new_user.find('.tick-delete').length){
+                        new_user.find('.btn-group').append('<button type="button" class="tick-delete btn btn-outline-secondary"><img src="images/trash.svg"/></button>');
+                    }
+
+                    // Add new user to page
+                    new_user.find('h5').text($('#cuName').val());
+                    new_user.find('small').text($('#cuEmail').val());
+                    new_user.appendTo('.list-group');
+                }
+
+                // Close modal
+                $('#cuModal').modal('hide');
             });
         </script>
     </body>
