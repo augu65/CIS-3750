@@ -13,6 +13,8 @@
 			 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
 			 <!-- BOOTSTRAP INCLUDE -->
 			 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+			 <!--Navbar-->
 		    <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="#">WDGPH Tick Identification Portal</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,10 +26,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="home.html">Home</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="reskin.html">Reskin</a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="manage.html">Manage Accounts<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
@@ -45,12 +47,16 @@
                 </ul>
             </div>
         </nav>
-		<div class=>
-		<h3>Reskin the Application</h3>
+				<!--END navbar-->
+
+		<!-- Main Reskin Functionality -->
+		<div align="center">
+		<h1>Reskin the Application</h1>
 		<br>
-		<form action="/action_page.php">
+		<form action="/action_page.php" align="left">
         Select a Logo: <input type="file" name="myFile"><br><br>
-				Select Colour Scheme: <input type="color" value="#008375"><input type="color" value="#234c5a"><input type="color" value="#779a0b"><br><br>
+				Select Colour Scheme: <input type="color" value="#008375">  <input type="color" value="#234c5a">  <input type="color" value="#779a0b"><br>
+				<p style="text-indent:14em;font-size:70%">  Primary &nbsp&nbsp&nbsp&nbsp&nbsp Secondary &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Tertiary</p>
 				Select Font: <select name="fontType">
             <option style="font-family:arial" value="Arial">Arial</option>
             <option style="font-family:'times new roman'" value="Times New Roman">Times New Roman</option>
@@ -58,6 +64,7 @@
             <option style="font-family:comic sans" value="Comic Sans">Comic Sans</option>
         </select><br><br>
 				Select Font size: <input type="number" id="size" name="size" value="12" min="2" max="62"><br><br>
+				<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#previewModal">Preview</button>
 				<button type="Submit" class="btn btn-secondary" data-toggle="modal" data-target="#aysModal">Submit</button>
 		</form>
 	</div>
@@ -79,5 +86,20 @@
 					 </div>
 			 </div>
 	 </div>
+
+	 <!-- Preview Modal -->
+	 <div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="aysModalLabel" aria-hidden="true">
+	 		<div class="modal-dialog" role="document">
+	 				<div class="modal-content">
+	 						<div class="modal-body">
+                  <img id="preview" class="border" width="100%" height="100%" src="images/placeholder_64.svg"/>
+	 						</div>
+	 						<div class="modal-footer">
+	 								<button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+	 						</div>
+	 				</div>
+	 		</div>
+	 </div>
+
 	</body>
 </html>
