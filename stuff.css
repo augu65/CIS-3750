@@ -2,3 +2,32 @@
 .navbar{
 	margin-bottom: 3%;
 }
+html, body{
+    height: 95%;
+}
+
+#create-btn{
+	position: fixed;
+	bottom: 10%;
+	right: 10%;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	text-align: center;
+}
+
+body > .container{
+    padding-left: 0;
+    padding-right: 0;
+    height: 95%;
+    overflow-y: scroll;
+    border-width: 2px !important; /* Yes it's gross, thank you bootstrap */
+}
+
+#users-heading{
+    padding: 4px;
+}
+
+#user_avatar{
+    margin: 10px 0;
+}
