@@ -4,10 +4,18 @@
 		<meta charset="UTF-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<link rel="stylesheet" type="text/css" href="stuff.css"/>
+			<link rel="stylesheet" type="text/css" href="education.css"/>
+		<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+			<!-- JQUERY (BOOTSTRAP DEPENDENCY) -->
+			<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+			<!-- BOOTSTRAP INCLUDE -->
+			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<!--	<link rel="stylesheet" type="text/css" href="education.css"/>-->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-		<title>Update Educational Content</title>
+		<!-- JQUERY (BOOTSTRAP DEPENDENCY) -->
+		<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+<title>Update Educational Content</title>
 	</head>
 	<body>
 		<!-- NAVBAR // START -->
@@ -25,10 +33,10 @@
 								<li class="nav-item">
 										<a class="nav-link" href="reskin.html">Reskin</a>
 								</li>
-								<li class="nav-item active">
+								<li class="nav-item">
 										<a class="nav-link" href="manage.html">Manage Accounts<span class="sr-only">(current)</span></a>
 								</li>
-								<li class="nav-item">
+								<li class="nav-item active">
 										<a class="nav-link" href="education.html">Educational Material</a>
 								</li>
 						</ul>
@@ -46,51 +54,236 @@
 		<!-- NAVBAR // END -->
 		<!-- FLOATING ACTION BUTTON -->
 		<button id="create-btn" type="button" class="btn btn-secondary shadow"><img src="images/plus.svg"/></button>
-
-	<!-- JQUERY (BOOTSTRAP DEPENDENCY) -->
-	<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
-	<!-- BOOTSTRAP INCLUDE -->
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<!-- MAIN LIST CONTENT -->
 	<div class="container border border-secondary rounded">
 			<h1 id="users-heading">Educational Content</h1>
 			<div class="list-group">
-					<a href="#" class="list-group-item list-group-item-action">
-							<div class="d-flex w-100 justify-content-between">
-									<div>
-											<h5 class="mb-1"></h5>
-											<small class="text-muted">admin@wdgpublichealth.ca</small>
+
+							<div id= "article"class="d-flex w-100 justify-content-between" style="border: thin solid black;">
+							<div class="btn-group-vertical" style="padding:10px;">
+						  <button onclick="up()" type="button" class="tick-up btn btn-outline-secondary"><i class='fas fa-chevron-up' style='font-size:24px'></i></button>
+							<button onclick="down()" type="button" class="tick-down btn btn-outline-secondary"><i class='fas fa-chevron-down' style='font-size:24px'></i></button>
+							</div>
+								<div>
+											<h5 class="mb-1">Let's talk ticks!</h5>
+											<small class="text-muted">Despite being around for a very long time, Lyme disease and ticks have only recently become a top-of-mind health issue. That’s because the areas of Ontario considered ‘at-risk’ for Lyme disease are growing every year, thanks at least in part to climate change. In fact, southern Wellington County is now an ‘at-risk’ area. But, because ticks can be transported around by animals (including birds), you could encounter one almost anywhere in the province.</small>
 									</div>
-									<div class="btn-group pull-right" role="group" aria-label="user-options">
-											<button type="button" class="tick-update btn btn-outline-secondary">Update</button>
+									<div class="dropdown">
+ 									<button onclick="myFunction(this)" class="dropbtn"><i class='fas fa-ellipsis-v' style='font-size:24px'></i></button>
+ 									<div id="myDropdown" class="dropdown-content">
+									<a onclick="up()" class="dropdown-item"	<button type="button" class="tick-up btn btn-outline-secondary"><i class='fas fa-chevron-up' style='font-size:24px'></i></button></a>
+								  <a  onclick="edit()"class="dropdown-item"	<button type="button" class="tick-edit btn btn-outline-secondary">Edit</button></a>
+								  <a  onclick="delete()"class="dropdown-item"	<button type="button" class="tick-delete btn btn-outline-secondary"><img src="images/trash.svg"/>Delete</button></a>
+								  <a onclick="down()" class="dropdown-item"	<button type="button" class="tick-down btn btn-outline-secondary"><i class='fas fa-chevron-down' style='font-size:24px'></i></button></a>
 									</div>
 							</div>
-					</a>
-					<a href="#" class="list-group-item list-group-item-action">
-							<div class="d-flex w-100 justify-content-between">
-									<div>
-											<h5 class="mb-1">Bob Star</h5>
-											<small class="text-muted">bob.star@wdgpublichealth.ca</small>
+
+							</div>
+							<div id= "article"class="d-flex w-100 justify-content-between" style="border: thin solid black;">
+								<div class="btn-group-vertical" style="padding:10px;">
+								<button onclick="up()" type="button" class="tick-up btn btn-outline-secondary"><i class='fas fa-chevron-up' style='font-size:24px'></i></button>
+								<button onclick="down()" type="button" class="tick-down btn btn-outline-secondary"><i class='fas fa-chevron-down' style='font-size:24px'></i></button>
+								</div>
+											<div>
+													<h5 class="mb-1">Tick in the Wild</h5>
+													<img style="border: thin solid black;"src="images/X.png" alt="Picture of a tick.">
+											</div>
+											<div class="dropdown">
+											<button onclick="myFunction(this)" class="dropbtn"><i class='fas fa-ellipsis-v' style='font-size:24px'></i></button>
+											<div id="myDropdown" class="dropdown-content">
+											<a  onclick="up()" class="dropdown-item"	<button type="button" class="tick-up btn btn-outline-secondary"><i class='fas fa-chevron-up' style='font-size:24px'></i></button></a>
+											<a  onclick="edit-pic()"class="dropdown-item"	<button type="button" class="tick-edit-pic btn btn-outline-secondary">Edit</button></a>
+											<a  onclick="delete()"class="dropdown-item"	<button type="button" class="tick-delete-pic btn btn-outline-secondary"><img src="images/trash.svg"/>Delete</button></a>
+											<a onclick="down()" class="dropdown-item"	<button type="button" class="tick-down btn btn-outline-secondary"><i class='fas fa-chevron-down' style='font-size:24px'></i></button></a>
+											</div>
 									</div>
-									<div class="btn-group pull-right" role="group" aria-label="user-options">
-											<button type="button" class="tick-update btn btn-outline-secondary">Update</button>
-											<button type="button" class="tick-delete btn btn-outline-secondary"><img src="images/trash.svg"/></button>
+
+									</div>
+					<div id= "article"class="d-flex w-100 justify-content-between" style="border: thin solid black;">
+						<div class="btn-group-vertical" style="padding:10px;">
+						<button onclick="up()" type="button" class="tick-up btn btn-outline-secondary"><i class='fas fa-chevron-up' style='font-size:24px'></i></button>
+						<button onclick="down()" type="button" class="tick-down btn btn-outline-secondary"><i class='fas fa-chevron-down' style='font-size:24px'></i></button>
+						</div>
+									<div>
+											<h5 class="mb-1">Tick Facts</h5>
+											<small class="text-muted">1.Ticks are usually found in wooded or brushy areas.</br>2. Ticks do not fly, jump or move quickly.</br>3. The most common tick in Wellington, Dufferin and Guelph is the American Dog Tick. It is not associated with Lyme disease.</br>4. The blacklegged tick population is expanding in the area and may transmit the bacteria that causes Lyme disease.</br>5. Quick detection and removal through daily tick checks is unlikely to result in Lyme disease transmission.</br>6. A tick that is feeding will get swollen and oversized over time.</br>7. In Ontario, blacklegged ticks are more commonly found on the north shores of Lake Ontario and Lake Erie.</small>
+									</div>
+									<div class="dropdown">
+ 									<button onclick="myFunction(this)" class="dropbtn"><i class='fas fa-ellipsis-v' style='font-size:24px'></i></button>
+ 									<div id="myDropdown" class="dropdown-content">
+									<a  onclick="up()" class="dropdown-item"	<button type="button" class="tick-up btn btn-outline-secondary"><i class='fas fa-chevron-up' style='font-size:24px'></i></button></a>
+								  <a  onclick="edit()"class="dropdown-item"	<button type="button" class="tick-edit btn btn-outline-secondary">Edit</button></a>
+								  <a  onclick="delete()"class="dropdown-item"	<button type="button" class="tick-delete btn btn-outline-secondary"><img src="images/trash.svg"/>Delete</button></a>
+								  <a onclick="down()" class="dropdown-item"	<button type="button" class="tick-down btn btn-outline-secondary"><i class='fas fa-chevron-down' style='font-size:24px'></i></button></a>
 									</div>
 							</div>
-					</a>
-					<a href="#" class="list-group-item list-group-item-action">
-							<div class="d-flex w-100 justify-content-between">
-									<div>
-											<h5 class="mb-1">Sam Jones</h5>
-											<small class="text-muted">sam.jones@wdgpublichealth.ca</small>
-									</div>
-									<div class="btn-group pull-right" role="group" aria-label="user-options">
-											<button type="button" class="tick-update btn btn-outline-secondary">Update</button>
-											<button type="button" class="tick-delete btn btn-outline-secondary"><img src="images/trash.svg"/></button>
-									</div>
+
 							</div>
-					</a>
+
+
+
 			</div>
 	</div>
+	<!-- Create/Update Modal -->
+	<div class="modal fade" id="cuModal" tabindex="-1" role="dialog" aria-labelledby="cuModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+					<div class="modal-content">
+							<div class="modal-header">
+									<h5 class="modal-title" id="cuModalLabel">Update Text</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+									</button>
+							</div>
+							<div class="modal-body">
+									<form>
+											<div class="form-group">
+													<input id="cuTitle" type="text" class="form-control" placeholder="Title"/>
+											</div>
+											<div class="form-group">
+													<input id="cuSmall" type="text" class="form-control" placeholder="Text"/>
+											</div>
+									</form>
+							</div>
+							<div class="modal-footer">
+									<button id="cuModalYesBtn" type="button" class="btn btn-primary">Save changes</button>
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+							</div>
+					</div>
+			</div>
+	</div>
+	<!-- "Are you sure?" Modal -->
+	<div class="modal fade" id="aysModal" tabindex="-1" role="dialog" aria-labelledby="aysModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+					<div class="modal-content">
+							<div class="modal-header">
+									<h5 class="modal-title" id="aysModalLabel">Are you sure?</h5>
+							</div>
+							<div class="modal-body">
+									<h5 id="aysModalBody">Deleting a Article is irreversible, are you sure you would like to continue?</h5>
+							</div>
+							<div class="modal-footer">
+									<button id="aysModalYesBtn" type="button" class="btn btn-primary">Yes</button>
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+							</div>
+					</div>
+			</div>
+	</div>
+</body>
+<script>
+let curUser = null;
 
+function up(){
+	var e = $("#article");
+	// move up:
+	e.prev().insertAfter(e);
+}
+function down(){
+
+}
+
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction(a) {
+  a.parentNode.getElementsByClassName("dropdown-content")[0].classList.toggle("show");
+}
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+// Delete user btn clicked
+
+$(document).on('click', '.tick-delete', function(e){
+		// Set AYS delete message
+		$('#aysModalBody').text("Deleting a Article is irreversible, are you sure you would like to continue?");
+		$('#aysModal').modal();
+		curUser = $(this).closest('#article');
+});
+// Update user btn clicked
+$('.tick-update').on('click', function(e){
+		curUser = $(this).closest('#article');
+		// Setup "Update User" Modal
+		$("#cuModalLabel").text("Update Text");
+		if(curUser != null){
+				let curTitle = curUser.find("h5").text();
+				let curSmall = curUser.find("small").text();
+				$('#cuTitle').val(curTitle);
+				$('#cuSmall').val(curSmall);
+		}
+
+		// Display Modal
+		$("#cuModal").modal();
+});
+// Update user btn clicked
+$('.tick-update-pic').on('click', function(e){
+		curUser = $(this).closest('#article');
+		// Setup "Update User" Modal
+		$("#cuModalLabel").text("Update Text");
+		if(curUser != null){
+				let curTitle = curUser.find("h5").text();
+				let curPic = curUser.find("img").text();
+				$('#cuTitle').val(curTitle);
+				$('#cuPic').val(curPic);
+		}
+
+		// Display Modal
+		$("#cuModal").modal();
+});
+// Create new Text btn clicked
+$('#create-btn').on('click', function(e){
+
+});
+// Shortcut "Save Changes" with <RETURN> press in email textfield
+$('#cuSmall').keyup(function(e){
+		if(e.keyCode == 13){
+				$('#cuModalYesBtn').click();
+		}
+});
+// Create new Text btn clicked
+$('#create-btn-text').on('click', function(e){
+		curUser = $(this).closest('a');
+		// Setup "Create User" Modal
+		$('#cuModalLabel').text("Create Text");
+		$('#cuTitle').val("");
+		$('#cuSmall').val("");
+
+
+		// Display Modal
+		$('#cuModal').modal();
+});
+// Create new Text btn clicked
+$('#create-btn-picture').on('click', function(e){
+		curUser = $(this).closest('a');
+		// Setup "Create User" Modal
+		$('#cuModalLabel').text("Create Picture");
+		$('#cuTitle').val("");
+		$('#cuPic').val("");
+
+
+		// Display Modal
+		$('#cuModal').modal();
+});
+// "Are you sure?" Yes btn clicked
+$('#aysModalYesBtn').on('click', function(e){
+		$("#aysModal").modal('hide');
+		let aysBody = $('#aysModalBody').text();
+		if(curUser != null){
+				if(aysBody.includes('Deleting')){ // AYS for Deletion
+						curUser.remove();
+				}else{ // AYS for update
+						curUser.find('h5').text($('#cuTitle').val());
+						curUser.find('small').text($('#cuSmall').val());
+						curUser.find('img').text($('#cuPic').val());
+				}
+		}
+});
+</script>
 </html>
