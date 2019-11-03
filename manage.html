@@ -4,6 +4,7 @@
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="stylesheet" type="text/css" href="stuff.css"/>
+        <link rel="stylesheet" type="text/css" href="manage.css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
 
         <title>User Management</title>
@@ -18,25 +19,25 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reskin.html">Reskin</a>
+                    </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="manage.html">Manage Accounts<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Reskin</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Manage Accounts</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Educational Material</a>
+                        <a class="nav-link" href="education.html">Educational Material</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Profile</a>
-                            <a class="dropdown-item" href="#">Logout</a>
+                            <a class="dropdown-item" href="profile.html">Profile</a>
+                            <a class="dropdown-item" href="index.html">Logout</a>
                         </div>
                     </li>
                 </ul>
@@ -44,12 +45,87 @@
         </nav> 
         <!-- NAVBAR // END -->
 
-        <!-- YOUR CODE HERE -->
-        <h1>Test Content!</h1>
-        
+        <!-- FLOATING ACTION BUTTON -->
+        <button id="create-btn" type="button" class="btn btn-secondary shadow"><img src="images/plus.svg"/></button>
+
+        <!-- MAIN LIST CONTENT -->
+        <div class="container border border-secondary rounded">
+            <h1 id="users-heading">Registered Users</h1>
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">Admin</h5>
+                        <div class="btn-group pull-right" role="group" aria-label="user-options">
+                            <button type="button" class="tick-update btn btn-outline-secondary">Update</button>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">Bob Star</h5>
+                        <div class="btn-group pull-right" role="group" aria-label="user-options">
+                            <button type="button" class="tick-update btn btn-outline-secondary">Update</button>
+                            <button type="button" class="tick-delete btn btn-outline-secondary"><img src="images/trash.svg"/></button>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">Tom Scott</h5>
+                        <div class="btn-group pull-right" role="group" aria-label="user-options">
+                            <button type="button" class="tick-update btn btn-outline-secondary">Update</button>
+                            <button type="button" class="tick-delete btn btn-outline-secondary"><img src="images/trash.svg"/></button>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- "Are you sure?" Modal -->
+        <div class="modal fade" id="aysModal" tabindex="-1" role="dialog" aria-labelledby="aysModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="aysModalLabel">Are you sure?</h5>
+                    </div>
+                    <div class="modal-body">
+                        <h5>Deleting a user is irreversible, are you sure you would like to continue?</h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="aysModalYesBtn" type="button" class="btn btn-primary">Yes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+	          
         <!-- JQUERY (BOOTSTRAP DEPENDENCY) -->
         <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
         <!-- BOOTSTRAP INCLUDE -->
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+        <!-- CUSTOM DYNAMIC UI FUNCTIONALITY -->
+        <script>
+            let curTickDelete = null;
+            $('.tick-delete').on('click', function(e){
+                $('#aysModal').modal();
+                curTickDelete = $(this).closest('a');
+            });
+
+            $('#aysModalYesBtn').on('click', function(e){
+                $("#aysModal").modal('hide');
+                if(curTickDelete != null){
+                    curTickDelete.remove(); 
+                }
+            });
+
+            $('.tick-update').on('click', function(e){
+                window.location.href = "update.html";
+            });
+
+            $('#create-btn').on('click', function(e){
+                window.location.href="create.html";
+            });
+        </script>
     </body>
 </html>
