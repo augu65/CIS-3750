@@ -53,7 +53,7 @@
 	<!-- MAIN LIST CONTENT -->
 	<div class="container border border-secondary rounded">
 			<h1 id="users-heading">Educational Content</h1>
-			<div class="list-group">
+			<div id="articleList" class="list-group">
 
 							<div id= "article"class="d-flex w-100 justify-content-between" style="border: thin solid black;">
 							<div class="btn-group-vertical" style="padding:10px;">
@@ -88,7 +88,7 @@
 											<div id="myDropdown" class="dropdown-content">
 											<a  onclick="up(this)" class="dropdown-item"	<button type="button" class="tick-up btn btn-outline-secondary"><i class='fas fa-chevron-up' style='font-size:24px'></i></button></a>
 											<a  onclick="editPic(this)"class="dropdown-item"	<button type="button" class="tick-edit-pic btn btn-outline-secondary" >Edit</button></a>
-											<a  onclick="deleted(this)"class="dropdown-item"	<button type="button" class="tick-delete-pic btn btn-outline-secondary"><img src="images/trash.svg"/>Delete</button></a>
+											<a  onclick="deleted(this)"class="dropdown-item"	<button type="button" class="tick-delete-pic btn btn-outline-secondary"><img src="images/trash.svg"/></button></a>
 											<a onclick="down(this)" class="dropdown-item"	<button type="button" class="tick-down btn btn-outline-secondary"><i class='fas fa-chevron-down' style='font-size:24px'></i></button></a>
 											<input type="file" id="fileLoader" name="files" title="Load File" accept="image/*"/>
 											</div>
@@ -110,7 +110,7 @@
  									<div id="myDropdown" class="dropdown-content">
 									<a  onclick="up(this)" class="dropdown-item"	<button type="button" class="tick-up btn btn-outline-secondary"><i class='fas fa-chevron-up' style='font-size:24px'></i></button></a>
 								  <a  onclick="edit(this)"class="dropdown-item"	<button type="button" class="tick-edit btn btn-outline-secondary">Edit</button></a>
-								  <a  onclick="deleted(this)"class="dropdown-item"	<button type="button" class="tick-delete btn btn-outline-secondary"><img src="images/trash.svg"/>Delete</button></a>
+								  <a  onclick="deleted(this)"class="dropdown-item"	<button type="button" class="tick-delete btn btn-outline-secondary"><img src="images/trash.svg"/></button></a>
 								  <a onclick="down(this)" class="dropdown-item"	<button type="button" class="tick-down btn btn-outline-secondary"><i class='fas fa-chevron-down' style='font-size:24px'></i></button></a>
 									</div>
 							</div>
@@ -195,8 +195,9 @@ function up(e){
 
 }
 function down(e){
+	var next=$(e).closest("#article").insertAfter(	$(e).closest("#article")[0].nextElementSibling);
 
-	$(e).closest("#article").insertAfter("#article");
+
 }
 
 function deleted(e){
@@ -276,10 +277,202 @@ $('#cuModalYesBtn').on('click', function(e){
 		}else{
 
 				if(modalTitle == "Create Text"){
+					var div = document.createElement('div');
+					div.setAttribute('id', 'article');
+					div.setAttribute('class', 'd-flex w-100 justify-content-between');
+					div.setAttribute('style', 'border: thin solid black;');
+					var buttonDiv=document.createElement('div');
+					buttonDiv.setAttribute('class', 'btn-group-vertical');
+					buttonDiv.setAttribute('style', 'padding:10px;');
+					var buttonUp=document.createElement('button');
+					buttonUp.setAttribute('class', 'tick-up btn btn-outline-secondary');
+					buttonUp.setAttribute('type', 'button');
+					buttonUp.setAttribute('onClick', 'up(this)');
+					var upIcon=document.createElement('i');
+					upIcon.setAttribute('class', 'fas fa-chevron-up');
+					upIcon.setAttribute('style', 'font-size:24px');
+					var buttonDown=document.createElement('button');
+					buttonDown.setAttribute('class', 'tick-up btn btn-outline-secondary');
+					buttonDown.setAttribute('type', 'button');
+					buttonDown.setAttribute('onClick', 'down(this)');
+					var downIcon=document.createElement('i');
+					downIcon.setAttribute('class', 'fas fa-chevron-down');
+					downIcon.setAttribute('style', 'font-size:24px');
+					buttonUp.append(upIcon);
+					buttonDown.append(downIcon);
+					buttonDiv.append(buttonUp);
+					buttonDiv.append(buttonDown);
+					var divInner = document.createElement('div');
+					var h5 = document.createElement('h5');
+					h5.setAttribute('class','mb-1')
+					h5.append($('#cuTitle').val());
+					var small = document.createElement('small');
+					small.setAttribute('class','text-muted');
+					small.append($('#cuText').val());
+					divInner.append(h5);
+					divInner.append(small);
+					var divDrop=document.createElement('div');
+					divDrop.setAttribute('class','dropdown');
+					var aUp=document.createElement('a');
+					aUp.setAttribute('class', 'dropdown-item');
+					aUp.setAttribute('onClick', 'up(this)');
+					var aDown=document.createElement('a');
+					aDown.setAttribute('class', 'dropdown-item');
+					aDown.setAttribute('onClick', 'down(this)');
+					var aEdit=document.createElement('a');
+					aEdit.setAttribute('class', 'dropdown-item');
+					aEdit.setAttribute('onClick', 'edit(this)');
+					var aDelete=document.createElement('a');
+					aDelete.setAttribute('class', 'dropdown-item');
+					aDelete.setAttribute('onClick', 'deleted(this)');
+					var buttonUp2=document.createElement('button');
+					buttonUp2.setAttribute('class', 'tick-up btn btn-outline-secondary');
+					buttonUp2.setAttribute('type', 'button');
+					var upIcon2=document.createElement('i');
+					upIcon2.setAttribute('class', 'fas fa-chevron-up');
+					upIcon2.setAttribute('style', 'font-size:24px');
+					var buttonDown2=document.createElement('button');
+					buttonDown2.setAttribute('class', 'tick-up btn btn-outline-secondary');
+					buttonDown2.setAttribute('type', 'button');
+					var downIcon2=document.createElement('i');
+					downIcon2.setAttribute('class', 'fas fa-chevron-down');
+					downIcon2.setAttribute('style', 'font-size:24px');
+					var buttonDelete=document.createElement('button');
+					buttonDelete.setAttribute('class', 'tick-up btn btn-outline-secondary');
+					buttonDelete.setAttribute('type', 'button');
+					var buttonEdit=document.createElement('button');
+					buttonEdit.setAttribute('class', 'tick-up btn btn-outline-secondary');
+					buttonEdit.setAttribute('type', 'button');
 
-				new_article.appendTo('.list-group');
+					var deleted=document.createElement('img');
+					deleted.setAttribute('src', 'images/trash.svg');
+
+					var buttonMenu=document.createElement('button');
+					buttonMenu.setAttribute('class', 'dropbtn');
+					buttonMenu.setAttribute('onClick', 'myFunction(this)');
+					var menu=document.createElement('i');
+					menu.setAttribute('class', 'fas fa-ellipsis-v');
+					menu.setAttribute('style', 'font-size:24px');
+					buttonMenu.append(menu);
+					divDrop.append(buttonMenu);
+					buttonUp2.append(upIcon2);
+					buttonDown2.append(downIcon2);
+					aUp.append(buttonUp2);
+					aDown.append(buttonDown2);
+					aEdit.append(buttonEdit);
+					buttonDelete.append(deleted);
+					aDelete.append(buttonDelete);
+					aEdit.innerHTML="Edit";
+					var dropdownDiv=document.createElement('div');
+					dropdownDiv.setAttribute('id','myDropdown');
+					dropdownDiv.setAttribute('class','dropdown-content');
+					dropdownDiv.append(aUp);
+					dropdownDiv.append(aEdit);
+					dropdownDiv.append(aDelete);
+					dropdownDiv.append(aDown);
+					divDrop.append(dropdownDiv);
+					divInner.append(divDrop);
+					div.append(buttonDiv);
+					div.append(divInner);
+					$('#articleList').append(div);
+				$('#aysModalBody').text("This action will create a Text, are you sure you would like to continue?");
+				$('#aysModal').modal();
 			}else{
-				new_article.appendTo('.list-group');
+				var div = document.createElement('div');
+				div.setAttribute('id', 'article');
+				div.setAttribute('class', 'd-flex w-100 justify-content-between');
+				div.setAttribute('style', 'border: thin solid black;');
+				var buttonDiv=document.createElement('div');
+				buttonDiv.setAttribute('class', 'btn-group-vertical');
+				buttonDiv.setAttribute('style', 'padding:10px;');
+				var buttonUp=document.createElement('button');
+				buttonUp.setAttribute('class', 'tick-up btn btn-outline-secondary');
+				buttonUp.setAttribute('type', 'button');
+				buttonUp.setAttribute('onClick', 'up(this)');
+				var upIcon=document.createElement('i');
+				upIcon.setAttribute('class', 'fas fa-chevron-up');
+				upIcon.setAttribute('style', 'font-size:24px');
+				var buttonDown=document.createElement('button');
+				buttonDown.setAttribute('class', 'tick-up btn btn-outline-secondary');
+				buttonDown.setAttribute('type', 'button');
+				buttonDown.setAttribute('onClick', 'down(this)');
+				var downIcon=document.createElement('i');
+				downIcon.setAttribute('class', 'fas fa-chevron-down');
+				downIcon.setAttribute('style', 'font-size:24px');
+				buttonUp.append(upIcon);
+				buttonDown.append(downIcon);
+				buttonDiv.append(buttonUp);
+				buttonDiv.append(buttonDown);
+				var divInner = document.createElement('div');
+				var pic = document.createElement('img');
+				pic.setAttribute('style','border: thin solid black;');
+				pic.setAttribute('src','images/X.png');
+				pic.setAttribute('alt','');
+				divInner.append(pic);
+				var divDrop=document.createElement('div');
+				divDrop.setAttribute('class','dropdown');
+				var aUp=document.createElement('a');
+				aUp.setAttribute('class', 'dropdown-item');
+				aUp.setAttribute('onClick', 'up(this)');
+				var aDown=document.createElement('a');
+				aDown.setAttribute('class', 'dropdown-item');
+				aDown.setAttribute('onClick', 'down(this)');
+				var aEdit=document.createElement('a');
+				aEdit.setAttribute('class', 'dropdown-item');
+				aEdit.setAttribute('onClick', 'editPic(this)');
+				var aDelete=document.createElement('a');
+				aDelete.setAttribute('class', 'dropdown-item');
+				aDelete.setAttribute('onClick', 'deleted(this)');
+				var buttonUp2=document.createElement('button');
+				buttonUp2.setAttribute('class', 'tick-up btn btn-outline-secondary');
+				buttonUp2.setAttribute('type', 'button');
+				var upIcon2=document.createElement('i');
+				upIcon2.setAttribute('class', 'fas fa-chevron-up');
+				upIcon2.setAttribute('style', 'font-size:24px');
+				var buttonDown2=document.createElement('button');
+				buttonDown2.setAttribute('class', 'tick-up btn btn-outline-secondary');
+				buttonDown2.setAttribute('type', 'button');
+				var downIcon2=document.createElement('i');
+				downIcon2.setAttribute('class', 'fas fa-chevron-down');
+				downIcon2.setAttribute('style', 'font-size:24px');
+				var buttonDelete=document.createElement('button');
+				buttonDelete.setAttribute('class', 'tick-up btn btn-outline-secondary');
+				buttonDelete.setAttribute('type', 'button');
+				var buttonEdit=document.createElement('button');
+				buttonEdit.setAttribute('class', 'tick-up btn btn-outline-secondary');
+				buttonEdit.setAttribute('type', 'button');
+				var deleted=document.createElement('img');
+				deleted.setAttribute('src', 'images/trash.svg');
+				var buttonMenu=document.createElement('button');
+				buttonMenu.setAttribute('class', 'dropbtn');
+				buttonMenu.setAttribute('onClick', 'myFunction(this)');
+				var menu=document.createElement('i');
+				menu.setAttribute('class', 'fas fa-ellipsis-v');
+				menu.setAttribute('style', 'font-size:24px');
+				buttonMenu.append(menu);
+				divDrop.append(buttonMenu);
+				buttonUp2.append(upIcon2);
+				buttonDown2.append(downIcon2);
+				aUp.append(buttonUp2);
+				aDown.append(buttonDown2);
+				aEdit.append(buttonEdit);
+				buttonDelete.append(deleted);
+				aDelete.append(buttonDelete);
+				aEdit.innerHTML="Edit";
+				var dropdownDiv=document.createElement('div');
+				dropdownDiv.setAttribute('id','myDropdown');
+				dropdownDiv.setAttribute('class','dropdown-content');
+				dropdownDiv.append(aUp);
+				dropdownDiv.append(aEdit);
+				dropdownDiv.append(aDelete);
+				dropdownDiv.append(aDown);
+				divDrop.append(dropdownDiv);
+				divInner.append(divDrop);
+				div.append(buttonDiv);
+				div.append(divInner);
+				$('#articleList').append(div);
+				$('#aysModalBody').text("This action will create a Picture, are you sure you would like to continue?");
+				$('#aysModal').modal();
 			}
 		}
 
