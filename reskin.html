@@ -5,13 +5,141 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<link rel="stylesheet" type="text/css" href="stuff.css"/>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>		
-		<title>title</title>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		<title>Reskin</title>
 	</head>
 	<body>
-		<div class="alert alert-primary" role="alert">
-		  A simple primary alert—check it out!
-		</div>
-		<h1>test</h1>
-	</h1>
+		   <!-- JQUERY (BOOTSTRAP DEPENDENCY) -->
+			 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+			 <!-- BOOTSTRAP INCLUDE -->
+			 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+			 <!--Navbar-->
+		    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">WDGPH Tick Identification Portal</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.html">Home</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="reskin.html">Reskin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="manage.html">Manage Accounts<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="education.html">Educational Material</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="profile.html">Profile</a>
+                            <a class="dropdown-item" onclick="logoutays()">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+				<!--END navbar-->
+
+		<!-- Main Reskin Functionality -->
+		<div align="center">
+		<h1>Reskin the Application</h1>
+		<br>
+		<form align="left">
+        Select a Logo: <input type="file" name="myFile"><br><br>
+				Select Colour Scheme: <input type="color" value="#008375">  <input type="color" value="#234c5a">  <input type="color" value="#779a0b"><br>
+				<p style="text-indent:14em;font-size:70%">  Primary &nbsp&nbsp&nbsp&nbsp&nbsp Secondary &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Tertiary</p>
+				Select Font: <select name="fontType">
+            <option style="font-family:arial" value="Arial">Arial</option>
+            <option style="font-family:'times new roman'" value="Times New Roman">Times New Roman</option>
+						<option style="font-family:courier" value="Courier">Courier</option>
+            <option style="font-family:comic sans" value="Comic Sans">Comic Sans</option>
+        </select><br><br>
+				Select Font size: <input type="number" id="size" name="size" value="12" min="2" max="62"><br><br>
+				<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#previewModal">Preview</button>
+				<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#aysModal">Submit</button>
+		</form>
+	</div>
+
+	 <!-- "Are you sure?" Modal -->
+	 <div class="modal fade" id="aysModal" tabindex="-1" role="dialog" aria-labelledby="aysModalLabel" aria-hidden="true">
+			 <div class="modal-dialog" role="document">
+					 <div class="modal-content">
+							 <div class="modal-header">
+									 <h5 class="modal-title" id="aysModalLabel">Are you sure?</h5>
+							 </div>
+							 <div class="modal-body">
+									 <h5 id="aysModalBody">Applying these changes will apply directly to the App.<br>Are you sure you want to apply these changes?</h5>
+							 </div>
+							 <div class="modal-footer">
+									 <button id="aysModalYesBtn" type="button" class="btn btn-primary" onclick="saveReskin()">Yes</button>
+									 <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+							 </div>
+					 </div>
+			 </div>
+	 </div>
+
+	 <!-- Preview Modal -->
+	 <div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="aysModalLabel" aria-hidden="true">
+	 		<div class="modal-dialog" role="document">
+	 				<div class="modal-content">
+	 						<div class="modal-body">
+                  <img id="preview" class="border" width="100%" height="100%" src="images/placeholder_64.svg"/>
+	 						</div>
+	 						<div class="modal-footer">
+	 								<button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+	 						</div>
+	 				</div>
+	 		</div>
+	 </div>
+
+	 <!-- Saved Modal -->
+	 <div class="modal fade" id="savedModal" tabindex="-1" role="dialog" aria-labelledby="aysModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+					<div class="modal-content">
+							<div class="modal-body">
+                  <h5>Changes have been saved</h5>
+									<button type="button" class="btn btn-primary" style="float: right" data-dismiss="modal">Ok</button>
+							</div>
+					</div>
+			</div>
+	 </div>
+
+	 <!-- logout Modal -->
+	 <div class="modal fade" id="logoutaysModal" tabindex="-1" role="dialog" aria-labelledby="aysModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+					<div class="modal-content">
+							<div class="modal-body">
+                  <h5>Are you sure you want to logout?</h5>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" style="float: right" data-dismiss="modal">No</button>
+									<button type="button" class="btn btn-primary" onclick="window.location.href='index.html'">Yes</button>
+							</div>
+					</div>
+			</div>
+	 </div>
+
+    <script>
+		function openays(){
+			$('#aysModal').modal('toggle');
+		}
+		function logoutays(){
+			$('#logoutaysModal').modal('show');
+		}
+    function saveReskin(){
+        $('#aysModal').modal('hide');
+				$('#savedModal').modal('show');
+		}
+		</script>
+
+	</body>
 </html>
