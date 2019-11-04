@@ -6,11 +6,7 @@
 		<link rel="stylesheet" type="text/css" href="stuff.css"/>
 			<link rel="stylesheet" type="text/css" href="education.css"/>
 		<script src='https://kit.fontawesome.com/a076d05399.js'></script>
-			<!-- JQUERY (BOOTSTRAP DEPENDENCY) -->
-			<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
-			<!-- BOOTSTRAP INCLUDE -->
-			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-	<!--	<link rel="stylesheet" type="text/css" href="education.css"/>-->
+			<!--	<link rel="stylesheet" type="text/css" href="education.css"/>-->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 		<!-- JQUERY (BOOTSTRAP DEPENDENCY) -->
@@ -91,10 +87,12 @@
 											<button onclick="myFunction(this)" class="dropbtn"><i class='fas fa-ellipsis-v' style='font-size:24px'></i></button>
 											<div id="myDropdown" class="dropdown-content">
 											<a  onclick="up(this)" class="dropdown-item"	<button type="button" class="tick-up btn btn-outline-secondary"><i class='fas fa-chevron-up' style='font-size:24px'></i></button></a>
-											<a  onclick="editPic(this)"class="dropdown-item"	<button type="button" class="tick-edit-pic btn btn-outline-secondary">Edit</button></a>
+											<a  onclick="editPic(this)"class="dropdown-item"	<button type="button" class="tick-edit-pic btn btn-outline-secondary" >Edit</button></a>
 											<a  onclick="deleted(this)"class="dropdown-item"	<button type="button" class="tick-delete-pic btn btn-outline-secondary"><img src="images/trash.svg"/>Delete</button></a>
 											<a onclick="down(this)" class="dropdown-item"	<button type="button" class="tick-down btn btn-outline-secondary"><i class='fas fa-chevron-down' style='font-size:24px'></i></button></a>
+											<input type="file" id="fileLoader" name="files" title="Load File" accept="image/*"/>
 											</div>
+
 									</div>
 
 									</div>
@@ -128,7 +126,7 @@
 			<div class="modal-dialog" role="document">
 					<div class="modal-content">
 							<div class="modal-header">
-									<h5 class="modal-title" id="cuModalLabel">Update Article</h5>
+									<h5 class="modal-title" id="cuModalLabel">Update Text</h5>
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 									</button>
@@ -138,8 +136,8 @@
 											<div class="form-group">
 													<input id="cuTitle" type="text" class="form-control" placeholder="Title"/>
 											</div>
-											<div class="form-group">
-													<input id="cuText" type="text" class="form-control" placeholder="Text"/>
+											<div class="form-group" height="100%">
+													<textarea id="cuText" type="text" class="form-control" placeholder="Text"></textarea>
 											</div>
 									</form>
 							</div>
@@ -151,6 +149,23 @@
 			</div>
 	</div>
 
+	<!-- "create Articles" Modal -->
+	<div class="modal fade" id="cuModalCreate" tabindex="-1" role="dialog" aria-labelledby="cuModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+					<div class="modal-content">
+							<div class="modal-header">
+									<h5 class="modal-title" id="cuModalLabel">Create Article</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+									<div class="modal-body" align= "center">
+											<button id="create-btn-text" type="button" class="btn btn-secondary" data-dismiss="modal">Create Text</button>
+											<button  id="create-btn-picture" type="button" class="btn btn-secondary" data-dismiss="modal">Create Picture</button>
+									</div>
+							</div>
+						</div>
+				</div>
 	<!-- "Are you sure?" Modal -->
 	<div class="modal fade" id="aysModal" tabindex="-1" role="dialog" aria-labelledby="aysModalLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
@@ -168,8 +183,13 @@
 					</div>
 			</div>
 	</div>
-<script>
+	<!-- JQUERY (BOOTSTRAP DEPENDENCY) -->
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+	<!-- BOOTSTRAP INCLUDE -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
+<script>
+let curArticle = null;
 function up(e){
 	$(e).closest("#article").insertBefore("#article");
 
@@ -180,13 +200,26 @@ function down(e){
 }
 
 function deleted(e){
-console.log("test");
+	$('#aysModalBody').text("Deleting a Article is irreversible, are you sure you would like to continue?");
+	$('#aysModal').modal();
+	curArticle = $(e).closest('#article');
 }
 function edit(e){
-console.log("test");
+	curArticle = $(e).closest('#article');
+	// Setup "Update Article" Modal
+	$("#cuModalLabel").text("Update Article");
+	if(curArticle != null){
+			let curTitle = curArticle.find("h5").text();
+			let curText = curArticle.find("small").text();
+			$('#cuTitle').val(curTitle);
+			$('#cuText').val(curText);
+	}
+
+	// Display Modal
+	$("#cuModal").modal();
 }
 function editPic(e){
-console.log("test");
+  $("#fileLoader").click();
 }
 
 /* When the user clicks on the button,
@@ -207,26 +240,47 @@ window.onclick = function(event) {
     }
   }
 }
+$('#create-btn').on('click', function(e){
+	curUser = $(e).closest('#article');
+	// Setup "Create User" Modal
+	$('#cuModalLabel').text("Create Article");
+	// Display Modal
+	$('#cuModalCreate').modal();
+
+});
+// Create new user btn clicked
+$('#create-btn-text').on('click', function(e){
+		curArticle = $(this).closest('#article');
+		// Setup "Create User" Modal
+		$('#cuModalLabel').text("Create Text");
+		$('#cuTitle').val("");
+		$('#cuText').val("");
+
+
+		// Display Modal
+		$('#cuModal').modal();
+});
+$('#create-btn-picture').on('click', function(e){
+	 $("#fileLoader").click();
+	 $("#cuModalYesBtn").click();
+
+});
+
 // Update/Create Modal "Save Changes" clicked
 $('#cuModalYesBtn').on('click', function(e){
 		let modalTitle = $('#cuModalLabel').text();
 
 		if(modalTitle == "Update Article"){
-				$('#aysModalBody').text("This action will change the user's account info, are you sure you would like to continue?");
+				$('#aysModalBody').text("This action will change the Article, are you sure you would like to continue?");
 				$('#aysModal').modal();
-		}else{ // Create User
-				// Clone existing user
-				let new_user = $('.list-group-item:last').clone(true);
+		}else{
 
-				// Ensure tick-delete class exists, otherwise add delete btn to list item
-				if(!new_user.find('.tick-delete').length){
-						new_user.find('.btn-group').append('<button type="button" class="tick-delete btn btn-outline-secondary"><img src="images/trash.svg"/></button>');
-				}
+				if(modalTitle == "Create Text"){
 
-				// Add new user to page
-				new_user.find('h5').text($('#cuTitle').val());
-				new_user.find('small').text($('#cuText').val());
-				new_user.appendTo('.list-group');
+				new_article.appendTo('.list-group');
+			}else{
+				new_article.appendTo('.list-group');
+			}
 		}
 
 		// Close modal
@@ -237,12 +291,14 @@ $('#cuModalYesBtn').on('click', function(e){
 $('#aysModalYesBtn').on('click', function(e){
 		$("#aysModal").modal('hide');
 		let aysBody = $('#aysModalBody').text();
-		if(curUser != null){
+		if(curArticle != null){
 				if(aysBody.includes('Deleting')){ // AYS for Deletion
-						curUser.remove();
+						curArticle.remove();
 				}else{ // AYS for update
-						curUser.find('h5').text($('#cuTitle').val());
-						curUser.find('small').text($('#CuText').val());
+						curArticle.find('h5').text($('#cuTitle').val());
+						curArticle.find('small').text($('#cuText').val());
+
+
 				}
 		}
 });
