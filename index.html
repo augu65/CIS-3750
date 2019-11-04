@@ -3,15 +3,110 @@
 	<head>
 		<meta charset="UTF-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-		<link rel="stylesheet" type="text/css" href="stuff.css"/>
+		<link rel="stylesheet" type="text/css" href="indexcss.css"/>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>		
-		<title>title</title>
-	</head>
-	<body>
-		<div class="alert alert-primary" role="alert">
-		  A simple primary alert—check it out!
+        <!-- JQUERY (BOOTSTRAP DEPENDENCY) -->
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+        <!-- BOOTSTRAP INCLUDE -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+        <title>Login</title>
+    </head>
+    <body>
+		<div id='submitContentWrapper'>
+			<form id='emailPassFields'>
+				Email: <br><input type="text" size="32"><br>
+				Password: <br><input type="password" size="32"><br>
+			</form>
+			  
+        	<!--login and forgot password buttons-->
+        	<button type="button" id=loginBtn class="btn btn-outline-secondary">Login</button>
+        	<button type="button" id=fpassBtn class="btn btn-outline-secondary">Forgot your Password</button>
+			<!-- end login and forgot password buttons-->
 		</div>
-		<h1>test</h1>
-	</h1>
+
+		<!--Forgot password modal-->
+        <div class="modal fade" id="fPassModal" tabindex="-1" role="dialog" aria-labelledby="fpassLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="fpassLabel">Forgot Password</h5>
+                    </div>
+                    <div class="form-group">
+						<label for="exampleFormControlInput1">Email address</label>
+						<input type="email" class="form-control" id="modalEmailField" placeholder="name@example.com">
+						</div>
+						<button id="modalFPassBtnBack" type="button" class="btn btn-primary">Back</button>
+                    <button id="modalFPassBtn" type="button" class="btn btn-primary">Submit E-Mail</button>
+                </div>
+            </div>
+		</div>
+
+		<!--Wrong password or username-->
+		<div class="modal fade" id="incorrectModal" tabindex="-1" role="dialog" aria-labelledby="incorrectLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="incorrectLabel">Forgot Password</h5>
+						</div>
+						<a>
+							Incorrect E-mail or password
+						</a>
+						<button id="modalIncorrectBtn" type="button" class="btn btn-primary">OK</button>
+					</div>
+				</div>
+			</div>
+		<!--New password modal-->
+		<div class="modal fade" id="newPassModal" tabindex="-1" role="dialog" aria-labelledby="incorrectLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="incorrectLabel">Create new password</h5>
+						</div>
+						<a>
+							Please create a new password
+						</a>
+						Password: <br><input type="password" size="32"><br>
+						Verify Password: <br><input type="password" size="32"><br>
+						<button id="modalNewPasswordBtn" type="button" class="btn btn-primary">Create new password</button>
+					</div>
+				</div>
+			</div>
+        <script>
+            let numAttempts = 0;
+            	$('#fpassBtn').on('click', function(e){
+				$('#fPassModal').modal();
+            	});
+
+				$('#modalFPassBtn').on('click', function(e){
+					numAttempts += 1;
+					$('#fPassModal').modal('hide');
+				});
+
+				$('#modalFPassBtnBack').on('click', function(e){
+					$('#fPassModal').modal('hide');
+				});
+
+				$('#loginBtn').on('click', function(e){
+				if (numAttempts == 0)
+				{
+					$('#incorrectModal').modal();
+				}
+				else
+				{
+					$("#newPassModal").modal();
+				}
+            	});
+
+				$("#modalNewPasswordBtn").on("click", function(e){
+					window.location.href = "home.html";
+				});
+
+				$('#modalIncorrectBtn').on('click', function(e){
+				$('#incorrectModal').modal('hide');
+				});
+
+        </script>
+    </body>
 </html>
