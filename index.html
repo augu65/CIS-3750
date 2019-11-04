@@ -30,37 +30,52 @@
 		</div>
 
 		<!--Forgot password modal-->
-        <div class="modal fade" id="fPassModal" tabindex="-1" role="dialog" aria-labelledby="fpassLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="fpassLabel">Forgot Password</h5>
-                    </div>
-                    <div class="form-group">
-						<label for="exampleFormControlInput1">Email address</label>
-						<input type="email" class="form-control" id="modalEmailField" placeholder="name@example.com">
+		<div class="modal" id="fPassModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Forgot Password</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="exampleFormControlInput1">Email address</label>
+							<input type="email" class="form-control" id="modalEmailField" placeholder="name@example.com">
 						</div>
-						<button id="modalFPassBtnBack" type="button" class="btn btn-primary">Back</button>
-                    <button id="modalFPassBtn" type="button" class="btn btn-primary">Submit E-Mail</button>
-                </div>
-            </div>
+					</div>
+					<div class="modal-footer">
+					    <button id="modalFPassBtn" type="button" class="btn btn-primary">Submit E-Mail</button>
+					    <button id="modalFPassBtnBack" type="button" class="btn btn-secondary">Back</button>
+					</div>
+				</div>
+			</div>
 		</div>
 
-		<!--Wrong password or username-->
-		<div class="modal fade" id="incorrectModal" tabindex="-1" role="dialog" aria-labelledby="incorrectLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="incorrectLabel">Forgot Password</h5>
-						</div>
+		<div class="modal" id="incorrectModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+					<h5 class="modal-title">Incorrect E-mail or password</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<!--<div class="modal-body">
 						<a>
 							Incorrect E-mail or password
 						</a>
+					</div>-->
+					<div class="modal-footer">
 						<button id="modalIncorrectBtn" type="button" class="btn btn-primary">OK</button>
 					</div>
 				</div>
 			</div>
+		</div>
+		
 		<!--New password modal-->
+		<!--
 		<div class="modal fade" id="newPassModal" tabindex="-1" role="dialog" aria-labelledby="incorrectLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
@@ -76,6 +91,7 @@
 					</div>
 				</div>
 			</div>
+		-->
         <script>
             let numAttempts = 0;
             	$('#fpassBtn').on('click', function(e){
