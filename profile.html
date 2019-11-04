@@ -5,13 +5,182 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<link rel="stylesheet" type="text/css" href="stuff.css"/>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>		
-		<title>title</title>
+
+		<title>Admin Profile</title>
 	</head>
 	<body>
-		<div class="alert alert-primary" role="alert">
-		  A simple primary alert—check it out!
+        <!-- NAVBAR // START -->
+	    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand" href="#">WDGPH Tick Identification Portal</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item">
+								<a class="nav-link" href="home.html">Home</a>
+					</li>
+					<li class="nav-item">
+								<a class="nav-link" href="reskin.html">Reskin</a>
+					</li>
+					<li class="nav-item active">
+								<a class="nav-link" href="manage.html">Manage Accounts<span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item">
+								<a class="nav-link" href="education.html">Educational Material</a>
+					</li>
+				</ul>
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item dropdown">
+					    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="profile.html">Profile</a>
+							<a class="dropdown-item" href="index.html">Logout</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</nav> 
+		<!-- NAVBAR // END -->
+
+		<div class="container" style="overflow:hidden">
+			<h1 id="profileHeader" align="center">Profile</h1>
+			<br>
+			<form>
+				<div class="form-group row">
+					<label class="col-sm-1 col-form-label">*Name:&nbsp&nbsp</label>
+					<div class="col-sm-8">
+					<input type="text" id="userName" name:"username" placeholder="Enter name" value="Admin" class="form-control" required>
+					</div>
+				</div>
+				<div>
+					<label>*E-mail:&nbsp&nbsp</label>
+					<input type="email" id="userEmail" name:"email" placeholder="Enter email" size="40" value="admin@wdgph.ca" required>
+				</div>
+				<div>
+					<label>*Old Password:&nbsp&nbsp</label>
+					<input type="password" id="userOldPswd" name:"oldPswd" size="40" required>
+				</div>
+				<div>
+					<label>New Password:&nbsp&nbsp</label>
+					<input type="password" id="userNewPswd1" name:"newPswd" size="40">
+				</div>
+				<div>
+					<label>Verify New Password:&nbsp&nbsp</label>
+					<input type="password" id="userNewPswd2" name:"verify_newPswd" size="40">
+				</div>
+				<!--<div>
+					<p>(required *)</p>
+				</div>-->
+				
+				<div align="right" style="padding-top: 50px;">
+					<a class="btn btn-outline-secondary" href="home.html" role="button">Back</a>
+					<button type="submit" class="btn btn-outline-secondary" id="updateButton">Update</button>
+				</div>
+			</form>
+
 		</div>
-		<h1>test</h1>
-	</h1>
+
+        <!-- "Are you sure?" Modal -->
+        <div class="modal fade" id="aysModal" tabindex="-1" role="dialog" aria-labelledby="aysModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="aysModalLabel">Are you sure?</h5>
+					</div>
+					<div class="modal-body">
+						<h5 id="aysModalBody">Are you sure that you want to apply these changes to your profile?</h5>
+					</div>
+					<div class="modal-footer">
+						<button id="aysModalYesBtn" type="button" class="btn btn-primary">Yes</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--"Passwords do not match" Modal -->
+		<div class="modal fade" id="checkPswdsModal" tabindex="-1" role="dialog" aria-labelledby="checkPswdsModalLabel" aria-hidden="true">
+           <div class="modal-dialog" role="document">
+                <div class="modal-content">
+					<div class="modal-body">
+						<h5 id="checkPswdsText">Password fields do not match.</h5>
+				    </div>
+				    <div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--"Invalid Password" Modal -->
+		<div class="modal fade" id="invPswdModal" tabindex="-1" role="dialog" aria-labelledby="invPswdModalLabel" aria-hidden="true">
+		    <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+				    <div class="modal-body">
+						<h5 id="invPswdText">Password is incorrect</h5>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+					</div>
+				</div>
+			</div>
+        </div>
+
+		<!--"Missing Fields" Modal -->
+		<div class="modal fade" id="emptyFieldsModal" tabindex="-1" role="dialog" aria-labelledby="emptyFiedsModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-body">
+						<h5 id="emptyFieldsText">Please make sure that all required fields are filled in.</h5>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+        <!-- JQUERY (BOOTSTRAP DEPENDENCY) -->
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+        <!-- BOOTSTRAP INCLUDE -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>		
+	
+		<script type="text/javascript">
+			var globalPswd = "abc123";
+
+			//On clicking on update button
+			//Verify if the new passwords match, if old password matches to global password
+			//and if all fields are filled in as required, display "Are you sure" modal
+			$('#updateButton').on('click', function(e){
+				var oldPswd = document.getElementById("userOldPswd").value;
+				var newPswd1 = document.getElementById("userNewPswd1").value;
+				var newPswd2 = document.getElementById("userNewPswd2").value;
+
+				if (newPswd1 != newPswd2) {
+					e.preventDefault();
+					$("#checkPswdsModal").modal();
+				}else if (oldPswd != globalPswd && oldPswd != "") {
+					e.preventDefault();
+					$("#invPswdModal").modal();
+				} else if(oldPswd == globalPswd) {//Show "Are you sure" modal
+				    e.preventDefault();
+				    $('#aysModal').modal();
+				}
+			});
+
+			//On clicking Yes on "Are you sure" modal
+			//Change name on navbar dropdown, and clear out all password fields
+			$('#aysModalYesBtn').on('click', function(e){
+				$('#navbarDropdown').text($('#userName').val());
+				$('#userOldPswd').val("");
+				$('#userNewPswd1').val("");
+				$('#userNewPswd2').val("");
+				$("#aysModal").modal('hide');
+
+			});
+		</script>
+
+	</body>
 </html>
