@@ -148,6 +148,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>		
 	
 		<script type="text/javascript">
+			//current old password
 			var globalPswd = "abc123";
 
 			//On clicking on update button
@@ -174,6 +175,7 @@
 			//Change name on navbar dropdown, and clear out all password fields
 			$('#aysModalYesBtn').on('click', function(e){
 				$('#navbarDropdown').text($('#userName').val());
+				globalPswd = $('#userNewPswd1').val();
 				$('#userOldPswd').val("");
 				$('#userNewPswd1').val("");
 				$('#userNewPswd2').val("");
