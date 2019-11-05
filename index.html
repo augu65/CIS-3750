@@ -62,11 +62,6 @@
 						<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<!--<div class="modal-body">
-						<a>
-							Incorrect E-mail or password
-						</a>
-					</div>-->
 					<div class="modal-footer">
 						<button id="modalIncorrectBtn" type="button" class="btn btn-primary">OK</button>
 					</div>
@@ -74,27 +69,6 @@
 			</div>
 		</div>
 
-		<!--New password modal-->
-		<div class="modal" id="newPassModal" tabindex="-1" role="dialog">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-						<h5 class="modal-title">Create new password</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							Password: <br><input type="password" size="32"><br>
-							Verify Password: <br><input type="password" size="32"><br>
-						</div>
-						<div class="modal-footer">
-							<button id="modalNewPasswordBtn" type="button" class="btn btn-primary">Create new password</button>
-						</div>
-					</div>
-				</div>
-			</div>
-	
         <script>
             let numAttempts = 0;
             	$('#fpassBtn').on('click', function(e){
@@ -117,13 +91,9 @@
 				}
 				else
 				{
-					$("#newPassModal").modal();
+					window.location.href = "home.html";
 				}
             	});
-
-				$("#modalNewPasswordBtn").on("click", function(e){
-					window.location.href = "home.html";
-				});
 
 				$('#modalIncorrectBtn').on('click', function(e){
 				$('#incorrectModal').modal('hide');
