@@ -9,7 +9,7 @@ html, body{
 #create-btn{
 	position: fixed;
 	bottom: 10%;
-	right: 10%;
+	left: 10%;
 	width: 60px;
 	height: 60px;
 	border-radius: 50%;
