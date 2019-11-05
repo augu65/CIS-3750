@@ -3,15 +3,111 @@
 	<head>
 		<meta charset="UTF-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-		<link rel="stylesheet" type="text/css" href="stuff.css"/>
+		<link rel="stylesheet" type="text/css" href="indexcss.css"/>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>		
-		<title>title</title>
-	</head>
-	<body>
-		<div class="alert alert-primary" role="alert">
-		  A simple primary alert—check it out!
+        <!-- JQUERY (BOOTSTRAP DEPENDENCY) -->
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+        <!-- BOOTSTRAP INCLUDE -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+        <title>Login</title>
+    </head>
+    <body>
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+					<a class="navbar-brand" href="#">WDGPH Tick Identification Portal</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+			</nav>
+		<div id='submitContentWrapper'>
+			<form id='emailPassFields'>
+				Email: <br><input type="text" size="32"><br>
+				Password: <br><input type="password" size="32"><br>
+			</form>
+			  
+        	<!--login and forgot password buttons-->
+        	<button type="button" id=loginBtn class="btn btn-outline-secondary">Login</button>
+        	<button type="button" id=fpassBtn class="btn btn-outline-secondary">Forgot your Password</button>
+			<!-- end login and forgot password buttons-->
 		</div>
-		<h1>test</h1>
-	</h1>
+
+		<!--Forgot password modal-->
+		<div class="modal" id="fPassModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Forgot Password</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="exampleFormControlInput1">Email address</label>
+							<input type="email" class="form-control" id="modalEmailField" placeholder="name@example.com">
+						</div>
+					</div>
+					<div class="modal-footer">
+					    <button id="modalFPassBtn" type="button" class="btn btn-primary">Submit E-Mail</button>
+					    <button id="modalFPassBtnBack" type="button" class="btn btn-secondary">Back</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal" id="incorrectModal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+					<h5 class="modal-title">Incorrect E-mail or password</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-footer">
+						<button id="modalIncorrectBtn" type="button" class="btn btn-primary">OK</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+        <script>
+				$(document).ready(function(){
+					if (!sessionStorage.getItem("numAttempts"))
+					{
+						sessionStorage.setItem("numAttempts", 0);
+					}
+				});
+            	$('#fpassBtn').on('click', function(e){
+				$('#fPassModal').modal();
+            	});
+
+				$('#modalFPassBtn').on('click', function(e){
+					sessionStorage.setItem("numAttempts", 1);
+					$('#fPassModal').modal('hide');
+				});
+
+				$('#modalFPassBtnBack').on('click', function(e){
+					$('#fPassModal').modal('hide');
+				});
+
+				$('#loginBtn').on('click', function(e){
+				let numAttempts = sessionStorage.getItem("numAttempts");
+				if (numAttempts == 0)
+				{
+					$('#incorrectModal').modal();
+				}
+				else
+				{
+					window.location.href = "home.html";
+				}
+            	});
+
+				$('#modalIncorrectBtn').on('click', function(e){
+				$('#incorrectModal').modal('hide');
+				});
+
+        </script>
+    </body>
 </html>
