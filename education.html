@@ -259,9 +259,10 @@ $('#create-btn-text').on('click', function(e){
 		$('#cuModal').modal();
 });
 $('#create-btn-picture').on('click', function(e){
-	 $("#fileLoader").click();
-	 	$("#cuModalYesBtn").click();
-
+	 $("#fileLoader").click().change(function(){
+			$("#cuModalYesBtn").click();
+				$("#fileLoader").stopPropagation();
+		});
 });
 
 // Update/Create Modal "Save Changes" clicked
@@ -423,11 +424,16 @@ $('#cuModalYesBtn').on('click', function(e){
 				var menu=document.createElement('i');
 				menu.setAttribute('class', 'fas fa-ellipsis-v');
 				menu.setAttribute('style', 'font-size:24px');
+				var input=document.createElement('input');
+				input.setAttribute('type', 'file');
+				input.setAttribute('id', 'fileLoader');
+				input.setAttribute('title', 'Load File');
+				input.setAttribute('name', 'files');
+				input.setAttribute('accept', 'image/*');
 				buttonMenu.append(menu);
 				divDrop.append(buttonMenu);
 				aUp.append(upIcon2);
 				aDown.append(downIcon2);
-				aUp.append(buttonUp2);
 			//	buttonDelete.append(deleted);
 				aDelete.append(deleted);
 				aEdit.innerHTML="Edit";
@@ -438,6 +444,7 @@ $('#cuModalYesBtn').on('click', function(e){
 				dropdownDiv.append(aEdit);
 				dropdownDiv.append(aDelete);
 				dropdownDiv.append(aDown);
+				dropdownDiv.append(input);
 				divDrop.append(dropdownDiv);
 				div.append(buttonDiv);
 				div.append(divInner);
