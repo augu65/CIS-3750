@@ -191,10 +191,10 @@
 <script>
 let curArticle = null;
 function up(e){
-	$(e).closest("#article").insertBefore("#article");
+	$(e).closest("#article").insertBefore($(e).closest("#article")[0].previousElementSibling);
 }
 function down(e){
-	var next=$(e).closest("#article").insertAfter($(e).closest("#article")[0].nextElementSibling);
+ $(e).closest("#article").insertAfter($(e).closest("#article")[0].nextElementSibling);
 }
 
 function deleted(e){
@@ -322,24 +322,12 @@ $('#cuModalYesBtn').on('click', function(e){
 					var aDelete=document.createElement('a');
 					aDelete.setAttribute('class', 'dropdown-item');
 					aDelete.setAttribute('onClick', 'deleted(this)');
-					var buttonUp2=document.createElement('button');
-					buttonUp2.setAttribute('class', 'tick-up btn btn-outline-secondary');
-					buttonUp2.setAttribute('type', 'button');
-					buttonUp2.setAttribute('style', 'border:0px;');
 					var upIcon2=document.createElement('i');
 					upIcon2.setAttribute('class', 'fas fa-chevron-up');
 					upIcon2.setAttribute('style', 'font-size:24px');
-					var buttonDown2=document.createElement('button');
-					buttonDown2.setAttribute('class', 'tick-up btn btn-outline-secondary');
-					buttonDown2.setAttribute('type', 'button');
-					buttonDown2.setAttribute('style', 'border:0px;');
 					var downIcon2=document.createElement('i');
 					downIcon2.setAttribute('class', 'fas fa-chevron-down');
 					downIcon2.setAttribute('style', 'font-size:24px');
-					var buttonDelete=document.createElement('button');
-					buttonDelete.setAttribute('class', 'tick-up btn btn-outline-secondary');
-					buttonDelete.setAttribute('type', 'button');
-					buttonDelete.setAttribute('style', 'border:0px;');
 					var buttonEdit=document.createElement('button');
 					buttonEdit.setAttribute('class', 'tick-up btn btn-outline-secondary');
 					buttonEdit.setAttribute('type', 'button');
@@ -355,13 +343,10 @@ $('#cuModalYesBtn').on('click', function(e){
 					menu.setAttribute('style', 'font-size:24px');
 					buttonMenu.append(menu);
 					divDrop.append(buttonMenu);
-					buttonUp2.append(upIcon2);
-					buttonDown2.append(downIcon2);
-					aUp.append(buttonUp2);
-					aDown.append(buttonDown2);
+					aUp.append(upIcon2);
+					aDown.append(downIcon2);
 					aEdit.append(buttonEdit);
-					buttonDelete.append(deleted);
-					aDelete.append(buttonDelete);
+					aDelete.append(deleted);
 					aEdit.innerHTML="Edit";
 					var dropdownDiv=document.createElement('div');
 					dropdownDiv.setAttribute('id','myDropdown');
@@ -421,24 +406,12 @@ $('#cuModalYesBtn').on('click', function(e){
 				var aDelete=document.createElement('a');
 				aDelete.setAttribute('class', 'dropdown-item');
 				aDelete.setAttribute('onClick', 'deleted(this)');
-				var buttonUp2=document.createElement('button');
-				buttonUp2.setAttribute('class', 'tick-up btn btn-outline-secondary');
-				buttonUp2.setAttribute('type', 'button');
-				buttonUp2.setAttribute('style', 'border:0px;');
 				var upIcon2=document.createElement('i');
 				upIcon2.setAttribute('class', 'fas fa-chevron-up');
 				upIcon2.setAttribute('style', 'font-size:24px');
-				var buttonDown2=document.createElement('button');
-				buttonDown2.setAttribute('class', 'tick-up btn btn-outline-secondary');
-				buttonDown2.setAttribute('type', 'button');
-				buttonDown2.setAttribute('style', 'border:0px;');
 				var downIcon2=document.createElement('i');
 				downIcon2.setAttribute('class', 'fas fa-chevron-down');
 				downIcon2.setAttribute('style', 'font-size:24px;');
-				var buttonDelete=document.createElement('button');
-				buttonDelete.setAttribute('class', 'tick-up btn btn-outline-secondary');
-				buttonDelete.setAttribute('type', 'button');
-				buttonDelete.setAttribute('style', 'border:0px;');
 				var buttonEdit=document.createElement('button');
 				buttonEdit.setAttribute('class', 'tick-up btn btn-outline-secondary');
 				buttonEdit.setAttribute('type', 'button');
@@ -452,13 +425,11 @@ $('#cuModalYesBtn').on('click', function(e){
 				menu.setAttribute('style', 'font-size:24px');
 				buttonMenu.append(menu);
 				divDrop.append(buttonMenu);
-				buttonUp2.append(upIcon2);
-				buttonDown2.append(downIcon2);
+				aUp.append(upIcon2);
+				aDown.append(downIcon2);
 				aUp.append(buttonUp2);
-				aDown.append(buttonDown2);
-				aEdit.append(buttonEdit);
-				buttonDelete.append(deleted);
-				aDelete.append(buttonDelete);
+			//	buttonDelete.append(deleted);
+				aDelete.append(deleted);
 				aEdit.innerHTML="Edit";
 				var dropdownDiv=document.createElement('div');
 				dropdownDiv.setAttribute('id','myDropdown');
