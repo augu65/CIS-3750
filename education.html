@@ -4,14 +4,473 @@
 		<meta charset="UTF-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<link rel="stylesheet" type="text/css" href="stuff.css"/>
+			<link rel="stylesheet" type="text/css" href="education.css"/>
+		<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+			<!--	<link rel="stylesheet" type="text/css" href="education.css"/>-->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>		
-		<title>title</title>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		<!-- JQUERY (BOOTSTRAP DEPENDENCY) -->
+		<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+<title>Update Educational Content</title>
 	</head>
 	<body>
-		<div class="alert alert-primary" role="alert">
-		  A simple primary alert—check it out!
-		</div>
-		<h1>test</h1>
-	</h1>
+		<!-- NAVBAR // START -->
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<a class="navbar-brand" href="#">WDGPH Tick Identification Portal</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav mr-auto">
+								<li class="nav-item">
+										<a class="nav-link" href="home.html">Home</a>
+								</li>
+								<li class="nav-item">
+										<a class="nav-link" href="reskin.html">Reskin</a>
+								</li>
+								<li class="nav-item">
+										<a class="nav-link" href="manage.html">Manage Accounts<span class="sr-only">(current)</span></a>
+								</li>
+								<li class="nav-item active">
+										<a class="nav-link" href="education.html">Educational Material</a>
+								</li>
+						</ul>
+						<ul class="navbar-nav ml-auto">
+								<li class="nav-item dropdown">
+										<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+										<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+												<a class="dropdown-item" href="profile.html">Profile</a>
+												<a class="dropdown-item" href="index.html">Logout</a>
+										</div>
+								</li>
+						</ul>
+				</div>
+		</nav>
+		<!-- NAVBAR // END -->
+		<!-- FLOATING ACTION BUTTON -->
+		<button id="create-btn" type="button" class="btn btn-secondary shadow"><img src="images/plus.svg"/></button>
+		<input style="visibility:false" type="file" id="fileLoader" name="files" title="Load File" accept="image/*"/>
+	<!-- MAIN LIST CONTENT -->
+	<div class="container border border-secondary rounded">
+			<h1 id="users-heading">Educational Content</h1>
+			<div id="articleList" class="list-group">
+
+							<div id= "article"class="d-flex w-100 justify-content-between" style="border: thin solid black;">
+							<div class="btn-group-vertical" style="padding:10px;">
+						  <button onclick="up(this)" type="button" class="tick-up btn btn-outline-secondary"><i class='fas fa-chevron-up' style='font-size:24px'></i></button>
+							<button onclick="down(this)" type="button" class="tick-down btn btn-outline-secondary"><i class='fas fa-chevron-down' style='font-size:24px'></i></button>
+							</div>
+								<div>
+											<h5 class="mb-1">Let's talk ticks!</h5>
+											<small class="text-muted">Despite being around for a very long time, Lyme disease and ticks have only recently become a top-of-mind health issue. That’s because the areas of Ontario considered ‘at-risk’ for Lyme disease are growing every year, thanks at least in part to climate change. In fact, southern Wellington County is now an ‘at-risk’ area. But, because ticks can be transported around by animals (including birds), you could encounter one almost anywhere in the province.</small>
+									</div>
+									<div class="dropdown">
+ 									<button onclick="myFunction(this)" class="dropbtn"><i class='fas fa-ellipsis-v' style='font-size:24px'></i></button>
+ 									<div id="myDropdown" class="dropdown-content">
+									<a onclick="up(this)" class="dropdown-item"	<button type="button" class="tick-up btn btn-outline-secondary"><i class='fas fa-chevron-up' style='font-size:24px'></i></button></a>
+								  <a  onclick="edit(this)"class="dropdown-item"	<button type="button" class="tick-edit btn btn-outline-secondary">Edit</button></a>
+								  <a onclick="deleted(this)"class="dropdown-item"	<button type="button" class="tick-delete btn btn-outline-secondary"><img src="images/trash.svg"/></button></a>
+								  <a onclick="down(this)" class="dropdown-item"	<button type="button" class="tick-down btn btn-outline-secondary"><i class='fas fa-chevron-down' style='font-size:24px'></i></button></a>
+									</div>
+							</div>
+
+							</div>
+							<div id= "article"class="d-flex w-100 justify-content-between" style="border: thin solid black;">
+								<div class="btn-group-vertical" style="padding:10px;">
+								<button onclick="up(this)" type="button" class="tick-up btn btn-outline-secondary"><i class='fas fa-chevron-up' style='font-size:24px'></i></button>
+								<button onclick="down(this)" type="button" class="tick-down btn btn-outline-secondary"><i class='fas fa-chevron-down' style='font-size:24px'></i></button>
+								</div>
+											<div>
+													<img style="border: thin solid black;"src="images/X.png" alt="Picture of a tick.">
+											</div>
+											<div class="dropdown">
+											<button onclick="myFunction(this)" class="dropbtn"><i class='fas fa-ellipsis-v' style='font-size:24px'></i></button>
+											<div id="myDropdown" class="dropdown-content">
+											<a  onclick="up(this)" class="dropdown-item"	<button type="button" class="tick-up btn btn-outline-secondary"><i class='fas fa-chevron-up' style='font-size:24px'></i></button></a>
+											<a  onclick="editPic(this)"class="dropdown-item"	<button type="button" class="tick-edit-pic btn btn-outline-secondary" >Edit</button></a>
+											<a  onclick="deleted(this)"class="dropdown-item"	<button type="button" class="tick-delete-pic btn btn-outline-secondary"><img src="images/trash.svg"/></button></a>
+											<a onclick="down(this)" class="dropdown-item"	<button type="button" class="tick-down btn btn-outline-secondary"><i class='fas fa-chevron-down' style='font-size:24px'></i></button></a>
+											<input type="file" id="fileLoader" name="files" title="Load File" accept="image/*"/>
+											</div>
+
+									</div>
+
+									</div>
+					<div id= "article"class="d-flex w-100 justify-content-between" style="border: thin solid black;">
+						<div class="btn-group-vertical" style="padding:10px;">
+						<button onclick="up(this)" type="button" class="tick-up btn btn-outline-secondary"><i class='fas fa-chevron-up' style='font-size:24px'></i></button>
+						<button onclick="down(this)" type="button" class="tick-down btn btn-outline-secondary"><i class='fas fa-chevron-down' style='font-size:24px'></i></button>
+						</div>
+									<div>
+											<h5 class="mb-1">Tick Facts</h5>
+											<small class="text-muted">1.Ticks are usually found in wooded or brushy areas.</br>2. Ticks do not fly, jump or move quickly.</br>3. The most common tick in Wellington, Dufferin and Guelph is the American Dog Tick. It is not associated with Lyme disease.</br>4. The blacklegged tick population is expanding in the area and may transmit the bacteria that causes Lyme disease.</br>5. Quick detection and removal through daily tick checks is unlikely to result in Lyme disease transmission.</br>6. A tick that is feeding will get swollen and oversized over time.</br>7. In Ontario, blacklegged ticks are more commonly found on the north shores of Lake Ontario and Lake Erie.</small>
+									</div>
+									<div class="dropdown">
+ 									<button onclick="myFunction(this)" class="dropbtn"><i class='fas fa-ellipsis-v' style='font-size:24px'></i></button>
+ 									<div id="myDropdown" class="dropdown-content">
+									<a  onclick="up(this)" class="dropdown-item"	<button type="button" class="tick-up btn btn-outline-secondary"><i class='fas fa-chevron-up' style='font-size:24px'></i></button></a>
+								  <a  onclick="edit(this)"class="dropdown-item"	<button type="button" class="tick-edit btn btn-outline-secondary">Edit</button></a>
+								  <a  onclick="deleted(this)"class="dropdown-item"	<button type="button" class="tick-delete btn btn-outline-secondary"><img src="images/trash.svg"/></button></a>
+								  <a onclick="down(this)" class="dropdown-item"	<button type="button" class="tick-down btn btn-outline-secondary"><i class='fas fa-chevron-down' style='font-size:24px'></i></button></a>
+									</div>
+							</div>
+
+							</div>
+
+
+
+			</div>
+	</div>
+	<!-- Create/Update Modal -->
+	<div class="modal fade" id="cuModal" tabindex="-1" role="dialog" aria-labelledby="cuModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+					<div class="modal-content">
+							<div class="modal-header">
+									<h5 class="modal-title" id="cuModalLabel">Update Text</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+									</button>
+							</div>
+							<div class="modal-body">
+									<form>
+											<div class="form-group">
+													<input id="cuTitle" type="text" class="form-control" placeholder="Title"/>
+											</div>
+											<div class="form-group" height="100%">
+													<textarea id="cuText" type="text" class="form-control" placeholder="Text"></textarea>
+											</div>
+									</form>
+							</div>
+							<div class="modal-footer">
+									<button id="cuModalYesBtn" type="button" class="btn btn-primary">Save changes</button>
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+							</div>
+					</div>
+			</div>
+	</div>
+
+	<!-- "create Articles" Modal -->
+	<div class="modal fade" id="cuModalCreate" tabindex="-1" role="dialog" aria-labelledby="cuModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+					<div class="modal-content">
+							<div class="modal-header">
+									<h5 class="modal-title" id="cuModalLabel">Create Article</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+									<div class="modal-body" align= "center">
+											<button id="create-btn-text" type="button" class="btn btn-secondary" data-dismiss="modal">Create Text</button>
+											<button  id="create-btn-picture" type="button" class="btn btn-secondary" data-dismiss="modal">Create Picture</button>
+									</div>
+							</div>
+						</div>
+				</div>
+	<!-- "Are you sure?" Modal -->
+	<div class="modal fade" id="aysModal" tabindex="-1" role="dialog" aria-labelledby="aysModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+					<div class="modal-content">
+							<div class="modal-header">
+									<h5 class="modal-title" id="aysModalLabel">Are you sure?</h5>
+							</div>
+							<div class="modal-body">
+									<h5 id="aysModalBody">Deleting a Article is irreversible, are you sure you would like to continue?</h5>
+							</div>
+							<div class="modal-footer">
+									<button id="aysModalYesBtn" type="button" class="btn btn-primary">Yes</button>
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+							</div>
+					</div>
+			</div>
+	</div>
+	<!-- JQUERY (BOOTSTRAP DEPENDENCY) -->
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+	<!-- BOOTSTRAP INCLUDE -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script>
+let curArticle = null;
+function up(e){
+	$(e).closest("#article").insertBefore($(e).closest("#article")[0].previousElementSibling);
+}
+function down(e){
+ $(e).closest("#article").insertAfter($(e).closest("#article")[0].nextElementSibling);
+}
+
+function deleted(e){
+	$('#aysModalBody').text("Deleting a Article is irreversible, are you sure you would like to continue?");
+	$('#aysModal').modal();
+	curArticle = $(e).closest('#article');
+}
+function edit(e){
+	curArticle = $(e).closest('#article');
+	// Setup "Update Article" Modal
+	$("#cuModalLabel").text("Update Article");
+	if(curArticle != null){
+			let curTitle = curArticle.find("h5").text();
+			let curText = curArticle.find("small").text();
+			$('#cuTitle').val(curTitle);
+			$('#cuText').val(curText);
+	}
+
+	// Display Modal
+	$("#cuModal").modal();
+}
+function editPic(e){
+  $("#fileLoader").click();
+}
+
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction(a) {
+  a.parentNode.getElementsByClassName("dropdown-content")[0].classList.toggle("show");
+}
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+$('#create-btn').on('click', function(e){
+	curUser = $(e).closest('#article');
+	// Setup "Create User" Modal
+	$('#cuModalLabel').text("Create Article");
+	// Display Modal
+	$('#cuModalCreate').modal();
+
+});
+// Create new user btn clicked
+$('#create-btn-text').on('click', function(e){
+		curArticle = $(this).closest('#article');
+		// Setup "Create User" Modal
+		$('#cuModalLabel').text("Create Text");
+		$('#cuTitle').val("");
+		$('#cuText').val("");
+
+
+		// Display Modal
+		$('#cuModal').modal();
+});
+$('#create-btn-picture').on('click', function(e){
+	 $("#fileLoader").click().change(function(){
+			$("#cuModalYesBtn").click();
+				$("#fileLoader").stopPropagation();
+		});
+});
+
+// Update/Create Modal "Save Changes" clicked
+$('#cuModalYesBtn').on('click', function(e){
+		let modalTitle = $('#cuModalLabel').text();
+
+		if(modalTitle == "Update Article"){
+				$('#aysModalBody').text("This action will change the Article, are you sure you would like to continue?");
+				$('#aysModal').modal();
+		}else{
+
+				if(modalTitle == "Create Text"){
+					var div = document.createElement('div');
+					div.setAttribute('id', 'article');
+					div.setAttribute('class', 'd-flex w-100 justify-content-between');
+					div.setAttribute('style', 'border: thin solid black;');
+					var buttonDiv=document.createElement('div');
+					buttonDiv.setAttribute('class', 'btn-group-vertical');
+					buttonDiv.setAttribute('style', 'padding:10px;');
+					var buttonUp=document.createElement('button');
+					buttonUp.setAttribute('class', 'tick-up btn btn-outline-secondary');
+					buttonUp.setAttribute('type', 'button');
+					buttonUp.setAttribute('onClick', 'up(this)');
+					var upIcon=document.createElement('i');
+					upIcon.setAttribute('class', 'fas fa-chevron-up');
+					upIcon.setAttribute('style', 'font-size:24px');
+					var buttonDown=document.createElement('button');
+					buttonDown.setAttribute('class', 'tick-up btn btn-outline-secondary');
+					buttonDown.setAttribute('type', 'button');
+					buttonDown.setAttribute('onClick', 'down(this)');
+					var downIcon=document.createElement('i');
+					downIcon.setAttribute('class', 'fas fa-chevron-down');
+					downIcon.setAttribute('style', 'font-size:24px');
+					buttonUp.append(upIcon);
+					buttonDown.append(downIcon);
+					buttonDiv.append(buttonUp);
+					buttonDiv.append(buttonDown);
+					var divInner = document.createElement('div');
+					var h5 = document.createElement('h5');
+					h5.setAttribute('class','mb-1')
+					h5.append($('#cuTitle').val());
+					var small = document.createElement('small');
+					small.setAttribute('class','text-muted');
+					small.append($('#cuText').val());
+					divInner.append(h5);
+					divInner.append(small);
+					var divDrop=document.createElement('div');
+					divDrop.setAttribute('class','dropdown');
+					var aUp=document.createElement('a');
+					aUp.setAttribute('class', 'dropdown-item');
+					aUp.setAttribute('onClick', 'up(this)');
+					var aDown=document.createElement('a');
+					aDown.setAttribute('class', 'dropdown-item');
+					aDown.setAttribute('onClick', 'down(this)');
+					var aEdit=document.createElement('a');
+					aEdit.setAttribute('class', 'dropdown-item');
+					aEdit.setAttribute('onClick', 'edit(this)');
+					var aDelete=document.createElement('a');
+					aDelete.setAttribute('class', 'dropdown-item');
+					aDelete.setAttribute('onClick', 'deleted(this)');
+					var upIcon2=document.createElement('i');
+					upIcon2.setAttribute('class', 'fas fa-chevron-up');
+					upIcon2.setAttribute('style', 'font-size:24px');
+					var downIcon2=document.createElement('i');
+					downIcon2.setAttribute('class', 'fas fa-chevron-down');
+					downIcon2.setAttribute('style', 'font-size:24px');
+					var buttonEdit=document.createElement('button');
+					buttonEdit.setAttribute('class', 'tick-up btn btn-outline-secondary');
+					buttonEdit.setAttribute('type', 'button');
+
+					var deleted=document.createElement('img');
+					deleted.setAttribute('src', 'images/trash.svg');
+
+					var buttonMenu=document.createElement('button');
+					buttonMenu.setAttribute('class', 'dropbtn');
+					buttonMenu.setAttribute('onClick', 'myFunction(this)');
+					var menu=document.createElement('i');
+					menu.setAttribute('class', 'fas fa-ellipsis-v');
+					menu.setAttribute('style', 'font-size:24px');
+					buttonMenu.append(menu);
+					divDrop.append(buttonMenu);
+					aUp.append(upIcon2);
+					aDown.append(downIcon2);
+					aEdit.append(buttonEdit);
+					aDelete.append(deleted);
+					aEdit.innerHTML="Edit";
+					var dropdownDiv=document.createElement('div');
+					dropdownDiv.setAttribute('id','myDropdown');
+					dropdownDiv.setAttribute('class','dropdown-content');
+					dropdownDiv.append(aUp);
+					dropdownDiv.append(aEdit);
+					dropdownDiv.append(aDelete);
+					dropdownDiv.append(aDown);
+					divDrop.append(dropdownDiv);
+					div.append(buttonDiv);
+					div.append(divInner);
+					div.append(divDrop);
+				$('#articleList').append(div);
+			}else{
+				var div = document.createElement('div');
+				div.setAttribute('id', 'article');
+				div.setAttribute('class', 'd-flex w-100 justify-content-between');
+				div.setAttribute('style', 'border: thin solid black;');
+				var buttonDiv=document.createElement('div');
+				buttonDiv.setAttribute('class', 'btn-group-vertical');
+				buttonDiv.setAttribute('style', 'padding:10px;');
+				var buttonUp=document.createElement('button');
+				buttonUp.setAttribute('class', 'tick-up btn btn-outline-secondary');
+				buttonUp.setAttribute('type', 'button');
+				buttonUp.setAttribute('onClick', 'up(this)');
+				var upIcon=document.createElement('i');
+				upIcon.setAttribute('class', 'fas fa-chevron-up');
+				upIcon.setAttribute('style', 'font-size:24px');
+				var buttonDown=document.createElement('button');
+				buttonDown.setAttribute('class', 'tick-up btn btn-outline-secondary');
+				buttonDown.setAttribute('type', 'button');
+				buttonDown.setAttribute('onClick', 'down(this)');
+				var downIcon=document.createElement('i');
+				downIcon.setAttribute('class', 'fas fa-chevron-down');
+				downIcon.setAttribute('style', 'font-size:24px');
+				buttonUp.append(upIcon);
+				buttonDown.append(downIcon);
+				buttonDiv.append(buttonUp);
+				buttonDiv.append(buttonDown);
+				var divInner = document.createElement('div');
+				var pic = document.createElement('img');
+				pic.setAttribute('style','border: thin solid black;');
+				pic.setAttribute('src','images/X.png');
+				pic.setAttribute('alt','This is a Tick');
+				divInner.append(pic);
+				var divDrop=document.createElement('div');
+				divDrop.setAttribute('class','dropdown');
+				var aUp=document.createElement('a');
+				aUp.setAttribute('class', 'dropdown-item');
+				aUp.setAttribute('onClick', 'up(this)');
+				var aDown=document.createElement('a');
+				aDown.setAttribute('class', 'dropdown-item');
+				aDown.setAttribute('onClick', 'down(this)');
+				var aEdit=document.createElement('a');
+				aEdit.setAttribute('class', 'dropdown-item');
+				aEdit.setAttribute('onClick', 'editPic(this)');
+				var aDelete=document.createElement('a');
+				aDelete.setAttribute('class', 'dropdown-item');
+				aDelete.setAttribute('onClick', 'deleted(this)');
+				var upIcon2=document.createElement('i');
+				upIcon2.setAttribute('class', 'fas fa-chevron-up');
+				upIcon2.setAttribute('style', 'font-size:24px');
+				var downIcon2=document.createElement('i');
+				downIcon2.setAttribute('class', 'fas fa-chevron-down');
+				downIcon2.setAttribute('style', 'font-size:24px;');
+				var buttonEdit=document.createElement('button');
+				buttonEdit.setAttribute('class', 'tick-up btn btn-outline-secondary');
+				buttonEdit.setAttribute('type', 'button');
+				var deleted=document.createElement('img');
+				deleted.setAttribute('src', 'images/trash.svg');
+				var buttonMenu=document.createElement('button');
+				buttonMenu.setAttribute('class', 'dropbtn');
+				buttonMenu.setAttribute('onClick', 'myFunction(this)');
+				var menu=document.createElement('i');
+				menu.setAttribute('class', 'fas fa-ellipsis-v');
+				menu.setAttribute('style', 'font-size:24px');
+				var input=document.createElement('input');
+				input.setAttribute('type', 'file');
+				input.setAttribute('id', 'fileLoader');
+				input.setAttribute('title', 'Load File');
+				input.setAttribute('name', 'files');
+				input.setAttribute('accept', 'image/*');
+				buttonMenu.append(menu);
+				divDrop.append(buttonMenu);
+				aUp.append(upIcon2);
+				aDown.append(downIcon2);
+				aDelete.append(deleted);
+				aEdit.innerHTML="Edit";
+				var dropdownDiv=document.createElement('div');
+				dropdownDiv.setAttribute('id','myDropdown');
+				dropdownDiv.setAttribute('class','dropdown-content');
+				dropdownDiv.append(aUp);
+				dropdownDiv.append(aEdit);
+				dropdownDiv.append(aDelete);
+				dropdownDiv.append(aDown);
+				dropdownDiv.append(input);
+				divDrop.append(dropdownDiv);
+				div.append(buttonDiv);
+				div.append(divInner);
+				div.append(divDrop);
+				$('#articleList').append(div);
+			}
+		}
+
+		// Close modal
+		$('#cuModal').modal('hide');
+});
+
+// "Are you sure?" Yes btn clicked
+$('#aysModalYesBtn').on('click', function(e){
+		$("#aysModal").modal('hide');
+		let aysBody = $('#aysModalBody').text();
+		if(curArticle != null){
+				if(aysBody.includes('Deleting')){ // AYS for Deletion
+						curArticle.remove();
+				}else{ // AYS for update
+						curArticle.find('h5').text($('#cuTitle').val());
+						curArticle.find('small').text($('#cuText').val());
+
+
+				}
+		}
+});
+</script>
 </html>
