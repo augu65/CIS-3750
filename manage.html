@@ -37,12 +37,12 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="profile.html">Profile</a>
-                            <a class="dropdown-item" href="index.html">Logout</a>
+                            <a class="dropdown-item" onclick="logoutays()">Logout</a>
                         </div>
                     </li>
                 </ul>
             </div>
-        </nav> 
+        </nav>
         <!-- NAVBAR // END -->
 
         <!-- FLOATING ACTION BUTTON -->
@@ -136,7 +136,22 @@
                 </div>
             </div>
         </div>
-	          
+
+        <!-- logout Modal -->
+     	 <div class="modal fade" id="logoutaysModal" tabindex="-1" role="dialog" aria-labelledby="aysModalLabel" aria-hidden="true">
+     			<div class="modal-dialog" role="document">
+     					<div class="modal-content">
+     							<div class="modal-body">
+                       <h5>Are you sure you want to logout?</h5>
+     								</div>
+     								<div class="modal-footer">
+     									<button type="button" class="btn btn-secondary" style="float: right" data-dismiss="modal">No</button>
+     									<button type="button" class="btn btn-primary" onclick="window.location.href='index.html'">Yes</button>
+     							</div>
+     					</div>
+     			</div>
+     	 </div>
+
         <!-- JQUERY (BOOTSTRAP DEPENDENCY) -->
         <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
         <!-- BOOTSTRAP INCLUDE -->
@@ -145,7 +160,7 @@
         <!-- CUSTOM DYNAMIC UI FUNCTIONALITY -->
         <script>
             let curUser = null;
-            
+
             // Delete user btn clicked
             $(document).on('click', '.tick-delete', function(e){
                 // Set AYS delete message
@@ -157,7 +172,7 @@
             // Update user btn clicked
             $('.tick-update').on('click', function(e){
                 curUser = $(this).closest('a');
-               
+
                 // If updating admin user, redirect to profile.html
                 if(curUser.find('h5').text() == "Admin"){
                     window.location.href = "profile.html";
@@ -228,13 +243,17 @@
                 let aysBody = $('#aysModalBody').text();
                 if(curUser != null){
                     if(aysBody.includes('Deleting')){ // AYS for Deletion
-                        curUser.remove(); 
+                        curUser.remove();
                     }else{ // AYS for update
                         curUser.find('h5').text($('#cuName').val());
                         curUser.find('small').text($('#cuEmail').val());
                     }
                 }
             });
+
+            function logoutays(){
+        			$('#logoutaysModal').modal('show');
+        		}
         </script>
     </body>
 </html>

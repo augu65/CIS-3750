@@ -41,7 +41,7 @@
 										<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
 										<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 												<a class="dropdown-item" href="profile.html">Profile</a>
-												<a class="dropdown-item" href="index.html">Logout</a>
+												<a class="dropdown-item" onclick="logoutays()">Logout</a>
 										</div>
 								</li>
 						</ul>
@@ -184,6 +184,22 @@
 					</div>
 			</div>
 	</div>
+
+	<!-- logout Modal -->
+	<div class="modal fade" id="logoutaysModal" tabindex="-1" role="dialog" aria-labelledby="aysModalLabel" aria-hidden="true">
+		 <div class="modal-dialog" role="document">
+				 <div class="modal-content">
+						 <div class="modal-body">
+								 <h5>Are you sure you want to logout?</h5>
+							 </div>
+							 <div class="modal-footer">
+								 <button type="button" class="btn btn-secondary" style="float: right" data-dismiss="modal">No</button>
+								 <button type="button" class="btn btn-primary" onclick="window.location.href='index.html'">Yes</button>
+						 </div>
+				 </div>
+		 </div>
+	</div>
+
 	<!-- JQUERY (BOOTSTRAP DEPENDENCY) -->
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
 	<!-- BOOTSTRAP INCLUDE -->
@@ -472,5 +488,10 @@ $('#aysModalYesBtn').on('click', function(e){
 				}
 		}
 });
+
+function logoutays(){
+	$('#logoutaysModal').modal('show');
+}
+
 </script>
 </html>

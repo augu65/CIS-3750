@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="stylesheet" type="text/css" href="indexcss.css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>		
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <!-- JQUERY (BOOTSTRAP DEPENDENCY) -->
         <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
         <!-- BOOTSTRAP INCLUDE -->
@@ -40,13 +40,13 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="profile.html">Profile</a>
-                            <a class="dropdown-item" href="index.html">Logout</a>
+                            <a class="dropdown-item" onclick="logoutays()">Logout</a>
                         </div>
                     </li>
                 </ul>
             </div>
-        </nav> 
-        <!-- NAVBAR // END --> 
+        </nav>
+        <!-- NAVBAR // END -->
 
         <!--New password modal-->
         <div class="modal" id="newPass" tabindex="-1" role="dialog">
@@ -65,11 +65,29 @@
 					</div>
 				</div>
             </div>
-	<p style="font-size:50px;color:black">Welcome</p>
-	<a>
-		Welcome to the administration portal for the WDGPH tick identification phone app. Through here you can reskin 
-		the app, manage administration accounts and change the educational info that will be displayed on the home page of the app.
+	<div style="padding-left:15%; padding-right:15%">
+	    <p style="font-size:50px;color:black">Welcome</p>
+	    <a>
+		      Welcome to the administration portal for the WDGPH tick identification phone app. Through here you can reskin
+		      the app, manage administration accounts and change the educational info that will be displayed on the home page of the app.
     </a>
+	</div>
+
+		<!-- logout Modal -->
+		<div class="modal fade" id="logoutaysModal" tabindex="-1" role="dialog" aria-labelledby="aysModalLabel" aria-hidden="true">
+			 <div class="modal-dialog" role="document">
+					 <div class="modal-content">
+							 <div class="modal-body">
+									 <h5>Are you sure you want to logout?</h5>
+								 </div>
+								 <div class="modal-footer">
+									 <button type="button" class="btn btn-secondary" style="float: right" data-dismiss="modal">No</button>
+									 <button type="button" class="btn btn-primary" onclick="window.location.href='index.html'">Yes</button>
+							 </div>
+					 </div>
+			 </div>
+		</div>
+
     <script>
         $( document ).ready(function() {
             if (!sessionStorage.getItem("doneNewPass"))
@@ -78,6 +96,10 @@
                 $("#newPass").modal({backdrop: 'static', keyboard: false});
             }
         });
+
+				function logoutays(){
+					$('#logoutaysModal').modal('show');
+				}
     </script>
     </body>
 </html>
