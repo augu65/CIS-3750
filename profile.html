@@ -15,7 +15,7 @@
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-		
+
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item">
@@ -36,12 +36,12 @@
 					    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" href="profile.html">Profile</a>
-							<a class="dropdown-item" href="index.html">Logout</a>
+							<a class="dropdown-item" onclick="logoutays()">Logout</a>
 						</div>
 					</li>
 				</ul>
 			</div>
-		</nav> 
+		</nav>
 		<!-- NAVBAR // END -->
 
 		<div class="container" style="overflow:hidden">
@@ -78,7 +78,7 @@
 				<!--<div>
 					<p>(required *)</p>
 				</div>-->
-				
+
 				<div style="padding-top: 20px;">
 					<a class="btn btn-outline-secondary" href="home.html" role="button">Back</a>
 					<button type="submit" class="btn btn-outline-secondary" id="updateButton">Update</button>
@@ -147,11 +147,26 @@
 			</div>
 		</div>
 
+		<!-- logout Modal -->
+ 	 <div class="modal fade" id="logoutaysModal" tabindex="-1" role="dialog" aria-labelledby="aysModalLabel" aria-hidden="true">
+ 			<div class="modal-dialog" role="document">
+ 					<div class="modal-content">
+ 							<div class="modal-body">
+                   <h5>Are you sure you want to logout?</h5>
+ 								</div>
+ 								<div class="modal-footer">
+ 									<button type="button" class="btn btn-secondary" style="float: right" data-dismiss="modal">No</button>
+ 									<button type="button" class="btn btn-primary" onclick="window.location.href='index.html'">Yes</button>
+ 							</div>
+ 					</div>
+ 			</div>
+ 	 </div>
+
         <!-- JQUERY (BOOTSTRAP DEPENDENCY) -->
         <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
         <!-- BOOTSTRAP INCLUDE -->
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>		
-	
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 		<script type="text/javascript">
 			//current old password
 			//var globalPswd = "abc123";
@@ -196,6 +211,11 @@
 				$("#aysModal").modal('hide');
 
 			});
+
+			function logoutays(){
+				$('#logoutaysModal').modal('show');
+			}
+
 		</script>
 
 	</body>
