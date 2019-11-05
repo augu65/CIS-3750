@@ -50,6 +50,7 @@
 		<!-- NAVBAR // END -->
 		<!-- FLOATING ACTION BUTTON -->
 		<button id="create-btn" type="button" class="btn btn-secondary shadow"><img src="images/plus.svg"/></button>
+		<input style="visibility:false" type="file" id="fileLoader" name="files" title="Load File" accept="image/*"/>
 	<!-- MAIN LIST CONTENT -->
 	<div class="container border border-secondary rounded">
 			<h1 id="users-heading">Educational Content</h1>
@@ -434,7 +435,6 @@ $('#cuModalYesBtn').on('click', function(e){
 				divDrop.append(buttonMenu);
 				aUp.append(upIcon2);
 				aDown.append(downIcon2);
-			//	buttonDelete.append(deleted);
 				aDelete.append(deleted);
 				aEdit.innerHTML="Edit";
 				var dropdownDiv=document.createElement('div');
