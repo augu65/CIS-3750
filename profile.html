@@ -48,7 +48,7 @@
 		<div style="padding-left:15%">
 			<h1 id="profileHeader">Profile</h1>
 			<br>
-			<!--<form style="width:41.5%">
+			<!-- <form style="width:41.5%">
 				<div>
 				<div align=right>
 					<label>*Name:&nbsp&nbsp</label>
@@ -76,7 +76,7 @@
 					<button type="submit" class="btn btn-primary" id="updateButton">Update</button>
 				</div>
 			</div>
-			</form>-->
+			</form> -->
 
 
 			<div class="container">
@@ -97,14 +97,34 @@
 						<label for="newPswd">New Password:&nbsp&nbsp</label>
 						<input class="form-control" type="password" id="userNewPswd1" name="newPswd">
 					</div>
+					<div class="form-group">
+						<label for="verify_newPswd">Verify New Password:&nbsp&nbsp</label>
+						<input class="form-control" type="password" id="userNewPswd2" name="verify_newPswd">
+					</div>
 					<div class="form-group justify-content-between">
-						<a class="btn btn-secondary" href="home.html" role="button">Back</a>
-						<button type="submit" class="btn btn-primary" id="updateButton">Update</button>
+						<button class="btn btn-primary" id="updateButton">Update</button>
+						<a class="btn btn-secondary" href="#" role="button">Back</a>
 					</div>
 				</form>
 			</div>
+		</div>
 
 
+		<!-- Data Saved Modal -->
+        <div class="modal fade" id="savedModal" tabindex="-1" role="dialog" aria-labelledby="savedModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="savedModalLabel">Saved!</h5>
+					</div>
+					<div class="modal-body">
+						<h5 id="savedModalBody">User account changes have been saved.</h5>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+					</div>
+				</div>
+			</div>
 		</div>
 
         <!-- "Are you sure?" Modal -->
@@ -129,6 +149,9 @@
 		<div class="modal fade" id="checkPswdsModal" tabindex="-1" role="dialog" aria-labelledby="checkPswdsModalLabel" aria-hidden="true">
            <div class="modal-dialog" role="document">
                 <div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Error</h5>
+					</div>
 					<div class="modal-body">
 						<h5 id="checkPswdsText">Password fields do not match.</h5>
 				    </div>
@@ -168,24 +191,26 @@
 		</div>
 
 		<!-- logout Modal -->
- 	 <div class="modal fade" id="logoutaysModal" tabindex="-1" role="dialog" aria-labelledby="aysModalLabel" aria-hidden="true">
- 			<div class="modal-dialog" role="document">
- 					<div class="modal-content">
- 							<div class="modal-body">
-                   <h5>Are you sure you want to logout?</h5>
- 								</div>
- 								<div class="modal-footer">
- 									<button type="button" class="btn btn-secondary" style="float: right" data-dismiss="modal">No</button>
- 									<button type="button" class="btn btn-primary" onclick="window.location.href='index.html'">Yes</button>
- 							</div>
- 					</div>
- 			</div>
- 	 </div>
+		<div class="modal fade" id="logoutaysModal" tabindex="-1" role="dialog" aria-labelledby="aysModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-body">
+							<h5>Are you sure you want to logout?</h5>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" style="float: right" data-dismiss="modal">No</button>
+						<button type="button" class="btn btn-primary" onclick="window.location.href='index.html'">Yes</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
-        <!-- JQUERY (BOOTSTRAP DEPENDENCY) -->
-        <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
-        <!-- BOOTSTRAP INCLUDE -->
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		
+
+		<!-- JQUERY (BOOTSTRAP DEPENDENCY) -->
+		<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+		<!-- BOOTSTRAP INCLUDE -->
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 		<script type="text/javascript">
 			//current old password
@@ -229,7 +254,9 @@
 				$('#userNewPswd1').val("");
 				$('#userNewPswd2').val("");
 				$("#aysModal").modal('hide');
-
+	
+				// Present saved modal
+				$('#savedModal').modal();
 			});
 
 			function logoutays(){
