@@ -14,9 +14,12 @@
         <title>Login</title>
     </head>
     <body>
-		<div>
-			<img src="images/placeholder_64.svg" alt="image place holder" style="border:3px solid black" width="650" height="400"> 
-		</div>
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+					<a class="navbar-brand" href="#">WDGPH Tick Identification Portal</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+			</nav>
 		<div id='submitContentWrapper'>
 			<form id='emailPassFields'>
 				Email: <br><input type="text" size="32"><br>
@@ -70,13 +73,18 @@
 		</div>
 
         <script>
-            let numAttempts = 0;
+				$(document).ready(function(){
+					if (!sessionStorage.getItem("numAttempts"))
+					{
+						sessionStorage.setItem("numAttempts", 0);
+					}
+				});
             	$('#fpassBtn').on('click', function(e){
 				$('#fPassModal').modal();
             	});
 
 				$('#modalFPassBtn').on('click', function(e){
-					numAttempts += 1;
+					sessionStorage.setItem("numAttempts", 1);
 					$('#fPassModal').modal('hide');
 				});
 
@@ -85,6 +93,7 @@
 				});
 
 				$('#loginBtn').on('click', function(e){
+				let numAttempts = sessionStorage.getItem("numAttempts");
 				if (numAttempts == 0)
 				{
 					$('#incorrectModal').modal();
