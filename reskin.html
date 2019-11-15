@@ -17,7 +17,7 @@
 			 <!--Navbar-->
 		    <nav class="navbar navbar-expand-lg navbar-custom">
             <a class="navbar-brand" href="home.html"><img style="background-color: #ffffff" src="images/logo.png"/><strong> TickedOff Web Portal</strong></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler m1-auto custom-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -41,7 +41,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="profile.html">Profile</a>
-                            <a class="dropdown-item" onclick="logoutays()">Logout</a>
+                            <a class="dropdown-item" style="color:#ffffff" onclick="logoutays()">Logout</a>
                         </div>
                     </li>
                 </ul>
@@ -50,23 +50,35 @@
 				<!--END navbar-->
 
 		<!-- Main Reskin Functionality -->
-		<div style="padding-left:15%">
-		<h1>Reskin the Application</h1>
+	</br>
+	<div>
 		<br>
-		<form align="left">
-        Select a Logo: <input type="file" name="myFile"><br><br>
-				Select Colour Scheme: <input type="color" value="#008375">  <input type="color" value="#234c5a">  <input type="color" value="#779a0b"><br>
-				<p style="text-indent:14em;font-size:70%">  Primary &nbsp&nbsp&nbsp&nbsp&nbsp Secondary &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Tertiary</p>
-				Select Font: <select name="fontType">
-            <option style="font-family:arial" value="Arial">Arial</option>
-            <option style="font-family:'times new roman'" value="Times New Roman">Times New Roman</option>
-						<option style="font-family:courier" value="Courier">Courier</option>
-            <option style="font-family:comic sans" value="Comic Sans">Comic Sans</option>
-        </select><br><br>
-				Select Font size: <input type="number" id="size" name="size" value="12" min="2" max="62"><br><br>
-				<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#previewModal">Preview</button>
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#aysModal">Submit</button>
-		</form>
+		<div style="padding-left:15%; float:left" width=50%>
+		  <h1>Reskin the Application</h1>
+			<br/>
+			<form align="left">
+	        Select a Logo: <input type="file" name="myFile"><br><br>
+					Select Colour Scheme: <input type="color" value="#008375">  <input type="color" value="#234c5a">  <input type="color" value="#779a0b"><br>
+					<p style="text-indent:14em;font-size:70%">  Primary &nbsp&nbsp&nbsp&nbsp&nbsp Secondary &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Tertiary</p>
+					Select Font: <select name="fontType">
+	            <option style="font-family:arial" value="Arial">Arial</option>
+	            <option style="font-family:'times new roman'" value="Times New Roman">Times New Roman</option>
+							<option style="font-family:courier" value="Courier">Courier</option>
+	            <option style="font-family:comic sans" value="Comic Sans">Comic Sans</option>
+	        </select><br><br>
+					Select Font size: <input type="number" id="size" name="size" value="12" min="2" max="62"><br><br>
+					<!--<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#previewModal">Preview</button>-->
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#aysModal">Submit</button>
+				<br/>
+			</form>
+  	</div>
+	<br/>
+		<div outline=black style="float:left">
+			<div style="padding-left:30%">
+			  <img style="width:80%" src="images/preview.png"/>
+		  </div>
+		</div>
+
 	</div>
 
 	 <!-- "Are you sure?" Modal -->
