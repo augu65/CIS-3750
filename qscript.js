@@ -21,6 +21,7 @@ $('#listDiv').on('click', '.q-delete', function(e)
 $('#listDiv').on('click', '.q-edit', function(e)
 {
     curUser = $(this).closest('a');
+    $('#qEditInput').val(curUser.find('.qtext').text());
     $('#editModal').modal();
 });
 
