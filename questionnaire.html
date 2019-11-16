@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" href="stuff.css"/>
+        <link rel="stylesheet" type="text/css" href="manage.css"/>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+
+        <title>Questionnaire Management</title>
+    </head>
+    <body>
+        <!-- NAVBAR // START -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="home.html"><img src="images/logo.png"/> Tick Identification Portal</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reskin.html">Reskin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="manage.html">Manage Accounts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="education.html">Educational Material</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="questionnaire.html">Manage Questionnaire<span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="profile.html">Profile</a>
+                            <a class="dropdown-item" onclick="logoutays()">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- NAVBAR // END -->
+
+        <!-- FLOATING ACTION BUTTON -->
+        <button id="create-btn" type="button" class="btn btn-secondary shadow"><img src="images/plus.svg"/></button>
+
+        <!-- MAIN LIST CONTENT -->
+        <div class="container border border-secondary rounded">
+            <h1 id="users-heading">Questionnaire Questions</h1>
+            <div id='listDiv' class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <div>
+                                    <h6 class="qtext mb-1">In which township did the bite occur?</h6>
+                                </div>
+                                <div class="btn-group pull-right" role="group" aria-label="user-options">
+                                    <button type="button" class="q-edit btn btn-outline-secondary">Edit</button>
+                                    <button type="button" class="q-delete btn btn-outline-secondary"><img src="images/trash.svg"/></button>
+                                </div>
+                            </div>
+                        </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <div>
+                            <h6 class="qtext mb-1">Is the tick currently attached?</h6>
+                        </div>
+                        <div class="btn-group pull-right" role="group" aria-label="user-options">
+                            <button type="button" class="q-edit btn btn-outline-secondary">Edit</button>
+                            <button type="button" class="q-delete btn btn-outline-secondary"><img src="images/trash.svg"/></button>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <div>
+                            <h6 class="qtext mb-1">To what is the tick attached?</h6>
+                        </div>
+                        <div class="btn-group pull-right" role="group" aria-label="user-options">
+                            <button type="button" class="q-edit btn btn-outline-secondary">Edit</button>
+                            <button type="button" class="q-delete btn btn-outline-secondary"><img src="images/trash.svg"/></button>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!--Delete modal-->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="aysModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Are you sure?</h5>
+                    </div>
+                    <div class="modal-body">
+                        <h5>Are you sure you would like to delete this question?</h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="deleteModalYesBtn" type="button" class="btn btn-primary">Yes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Edit Modal-->
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="aysModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit Question</h5>
+                        </div>
+                        <div class="modal-body">
+                            <h5><input id='qEditInput' type="text" size="32"></h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="editModalBtn" type="button" class="btn btn-primary">Save Changes</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        <!--Create Modal-->
+        <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="aysModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Create Question</h5>
+                        </div>
+                        <div class="modal-body">
+                            <h5><input id='qCreateInput' type="text" size="32"></h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="createModalBtn" type="button" class="btn btn-primary">Create Question</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- Create/Update Modal -->
+        <!--
+        <div class="modal fade" id="cuModal" tabindex="-1" role="dialog" aria-labelledby="cuModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="cuModalLabel">Update User</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img id="user_avatar" class="border" src="images/placeholder_64.svg"/>
+                        <form>
+                            <div class="form-group">
+                                <input id="cuName" type="text" class="form-control" placeholder="Name"/>
+                            </div>
+                            <div class="form-group">
+                                <input id="cuEmail" type="email" class="form-control" placeholder="Email"/>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="cuModalYesBtn" type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    -->
+
+        <!-- "Are you sure?" Modal -->
+        <!--
+        <div class="modal fade" id="aysModal" tabindex="-1" role="dialog" aria-labelledby="aysModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="aysModalLabel">Are you sure?</h5>
+                    </div>
+                    <div class="modal-body">
+                        <h5 id="aysModalBody">Deleting a user is irreversible, are you sure you would like to continue?</h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="aysModalYesBtn" type="button" class="btn btn-primary">Yes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        -->
+
+        <!-- logout Modal -->
+        <!--
+     	 <div class="modal fade" id="logoutaysModal" tabindex="-1" role="dialog" aria-labelledby="aysModalLabel" aria-hidden="true">
+     			<div class="modal-dialog" role="document">
+     					<div class="modal-content">
+     							<div class="modal-body">
+                       <h5>Are you sure you want to logout?</h5>
+     								</div>
+     								<div class="modal-footer">
+     									<button type="button" class="btn btn-secondary" style="float: right" data-dismiss="modal">No</button>
+     									<button type="button" class="btn btn-primary" onclick="window.location.href='index.html'">Yes</button>
+     							</div>
+     					</div>
+     			</div>
+     	 </div>
+        -->
+        <!-- JQUERY (BOOTSTRAP DEPENDENCY) -->
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+        <!-- BOOTSTRAP INCLUDE -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+        <!-- CUSTOM DYNAMIC UI FUNCTIONALITY -->
+
+        <script src='qscript.js'></script>
+        <!--
+        <script>
+            let curUser = null;
+
+            // Delete user btn clicked
+            $(document).on('click', '.tick-delete', function(e){
+                // Set AYS delete message
+                $('#aysModalBody').text("Deleting a user is irreversible, are you sure you would like to continue?");
+                $('#aysModal').modal();
+                curUser = $(this).closest('a');
+            });
+
+            // Update user btn clicked
+            $('.tick-update').on('click', function(e){
+                curUser = $(this).closest('a');
+
+                // If updating admin user, redirect to profile.html
+                if(curUser.find('h5').text() == "Admin"){
+                    window.location.href = "profile.html";
+                }
+
+                // Setup "Update User" Modal
+                $("#cuModalLabel").text("Update User");
+                if(curUser != null){
+                    let curUserName = curUser.find("h5").text();
+                    let curUserEmail = curUser.find("small").text();
+                    $('#cuName').val(curUserName);
+                    $('#cuEmail').val(curUserEmail);
+                }
+
+                // Display Modal
+                $("#cuModal").modal();
+            });
+
+            // Create new user btn clicked
+            $('#create-btn').on('click', function(e){
+                curUser = $(this).closest('a');
+                // Setup "Create User" Modal
+                $('#cuModalLabel').text("Create User");
+                $('#cuName').val("");
+                $('#cuEmail').val("");
+
+
+                // Display Modal
+                $('#cuModal').modal();
+            });
+
+            // Shortcut "Save Changes" with <RETURN> press in email textfield
+            $('#cuEmail').keyup(function(e){
+                if(e.keyCode == 13){
+                    $('#cuModalYesBtn').click();
+                }
+            });
+
+            // Update/Create Modal "Save Changes" clicked
+            $('#cuModalYesBtn').on('click', function(e){
+                let modalTitle = $('#cuModalLabel').text();
+
+                if(modalTitle == "Update User"){
+                    $('#aysModalBody').text("This action will change the user's account info, are you sure you would like to continue?");
+                    $('#aysModal').modal();
+                }else{ // Create User
+                    // Clone existing user
+                    let new_user = $('.list-group-item:last').clone(true);
+
+                    // Ensure tick-delete class exists, otherwise add delete btn to list item
+                    if(!new_user.find('.tick-delete').length){
+                        new_user.find('.btn-group').append('<button type="button" class="tick-delete btn btn-outline-secondary"><img src="images/trash.svg"/></button>');
+                    }
+
+                    // Add new user to page
+                    new_user.find('h5').text($('#cuName').val());
+                    new_user.find('small').text($('#cuEmail').val());
+                    new_user.appendTo('.list-group');
+                }
+
+                // Close modal
+                $('#cuModal').modal('hide');
+            });
+
+            // "Are you sure?" Yes btn clicked
+            $('#aysModalYesBtn').on('click', function(e){
+                $("#aysModal").modal('hide');
+                let aysBody = $('#aysModalBody').text();
+                if(curUser != null){
+                    if(aysBody.includes('Deleting')){ // AYS for Deletion
+                        curUser.remove();
+                    }else{ // AYS for update
+                        curUser.find('h5').text($('#cuName').val());
+                        curUser.find('small').text($('#cuEmail').val());
+                    }
+                }
+            });
+
+            function logoutays(){
+        			$('#logoutaysModal').modal('show');
+        		}
+        </script>
+    -->
+    </body>
+</html>
