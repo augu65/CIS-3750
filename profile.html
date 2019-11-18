@@ -65,6 +65,7 @@
 					<div class="form-group">
 						<label for="newPswd">New Password:&nbsp&nbsp</label>
 						<input class="form-control" type="password" id="userNewPswd1" name="newPswd">
+						<small class="text-muted">The new password must be at least 8 characters long and contain at least an uppercase letter, a number and a symbol</small>
 					</div>
 					<div class="form-group">
 						<label for="verify_newPswd">Verify New Password:&nbsp&nbsp</label>
@@ -131,12 +132,12 @@
 			</div>
 		</div>
 
-		<!--"Invalid Password" Modal -->
+		<!--"Password doesn't meet required criteria Modal -->
 		<div class="modal fade" id="invPswdModal" tabindex="-1" role="dialog" aria-labelledby="invPswdModalLabel" aria-hidden="true">
 		    <div class="modal-dialog" role="document">
 			    <div class="modal-content">
 				    <div class="modal-body">
-						<h5 id="invPswdText">Password is incorrect</h5>
+						<h5 id="invPswdText">The new password does not meet required criteria.</h5>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
@@ -182,43 +183,31 @@
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 		<script type="text/javascript">
-			//current old password
-			//var globalPswd = "abc123";
 
 			$('#updateButton').on('click', function(e){
 				var oldPswd = document.getElementById("userOldPswd").value;
 				var newPswd1 = document.getElementById("userNewPswd1").value;
 				var newPswd2 = document.getElementById("userNewPswd2").value;
-
-				//On clicking on update button
-				//Verify if the new passwords match, if old password matches to global password
-				//and if all fields are filled in as required, display "Are you sure" modal
-				/*if (newPswd1 != newPswd2) {
-					e.preventDefault();
-					$("#checkPswdsModal").modal();
-				}else if (oldPswd != globalPswd && oldPswd != "") {
-					e.preventDefault();
-					$("#invPswdModal").modal();
-				} else if (oldPswd == globalPswd) {  //Show "Are you sure" modal
-				    e.preventDefault();
-				    $('#aysModal').modal();
-				}*/
-
 				//If new pswd doesn't match verify new pswd trigger "Passwords not match" modal
 				if (newPswd1 != newPswd2) {
 					e.preventDefault();
 					$("#checkPswdsModal").modal();
-				}else if (oldPswd != "") {  //if old password is provided, show "are you sure" modal
-					e.preventDefault();
-					$('#aysModal').modal();
-				}
+				} else {
+					if (oldPswd != "") {	//if old password is provided, show "are you sure" modal
+						e.preventDefault();
+						if (checkValidPass(newPswd1)) {
+							$('#aysModal').modal();
+						} else {
+							$('#invPswdModal').modal();
+						}
+					}
+				}	
 			});
 
 			//On clicking Yes on "Are you sure" modal
 			//Change name on navbar dropdown, and clear out all password fields
 			$('#aysModalYesBtn').on('click', function(e){
 				$('#navbarDropdown').text($('#userName').val());
-				//globalPswd = $('#userNewPswd1').val();
 				$('#userOldPswd').val("");
 				$('#userNewPswd1').val("");
 				$('#userNewPswd2').val("");
@@ -235,6 +224,40 @@
 			function logoutays(){
 				$('#logoutaysModal').modal('show');
 			}
+
+			//return false if password does not match criteria
+			function checkValidPass(pass)
+        	{
+            	let number = false;
+                let capLetter = false;
+				let symRegEx = /[ !"#$%&'()*+\-./:;<=>?@^_{|}~]/;
+
+				console.log("validating pswds");
+                if (pass.length < 8)
+                {
+                    return false;
+                }
+                for (i = 0; i < pass.length; i++)
+                {
+                    let tmpChar = pass.charCodeAt(i);
+                    if (tmpChar >= 48 && tmpChar <= 57)
+                    {
+                        number = true;
+                    } else if (tmpChar >= 65 && tmpChar <= 90)
+                    {
+                        capLetter = true;
+                    }
+                }
+				if (!(symRegEx.test(pass))) {
+					return false;
+				}
+
+                if (number == true && capLetter == true)
+                {
+                    return true;
+                }
+                return false;
+            }
 
 		</script>
 
