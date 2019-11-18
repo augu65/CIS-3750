@@ -1,0 +1,7 @@
+{ 
+  "name": "CIS-3750",
+  "version": "1.0.0",
+  "description": "CIS-3750 Wireframe", 
+  "dependencies" :
+  { "bootstrap" : "4.3.1" }
+}
