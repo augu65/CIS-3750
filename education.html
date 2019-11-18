@@ -320,9 +320,21 @@ function editL(e){
 			let curText= curArticle[1].childNodes;
 			$('#cuTitleL').val(curTitle);
 			let j=0;
+			if(curText[0].nodeName=='#text'){
 			for(i=3; i<curText.length; i=i+2){
 				text[j]=curText[i].childNodes[1].href;
 				j++;
+			}
+			}else{
+				for(i=1; i<curText.length; i++){
+					console.log(curText[i]);
+
+					text[j]=curText[i].childNodes[0].href;
+					if(text[j]=="file:///C:/Users/Jonah/Desktop/CIS-3750/education.html"){
+						text[j]='';
+					}
+					j++;
+				}
 			}
 			$('#cuTextL1').val(text[0]);
 			$('#cuTextL2').val(text[1]);
@@ -332,7 +344,7 @@ function editL(e){
 			$('#cuTextL6').val(text[5]);
 			$('#cuTextL7').val(text[6]);
 	}
-
+	text=[];
 	// Display Modal
 	$("#cuModalLinks").modal();
 }
