@@ -183,7 +183,7 @@
 			<div class="modal-dialog" role="document">
 					<div class="modal-content">
 							<div class="modal-header">
-									<h5 class="modal-title" id="cuModalLabel">Update Links</h5>
+									<h5 class="modal-title" id="cuModalLabelL">Update Links</h5>
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 									</button>
@@ -309,21 +309,28 @@ function edit(e){
 	// Display Modal
 	$("#cuModal").modal();
 }
+var text=[7];
 function editL(e){
 	curArticle = $(e).closest('#article').find("div");
 	// Setup "Update Article" Modal
-	$("#cuModalLabel").text("Update Article");
+	$("#cuModalLabelL").text("Update Article");
 	if(curArticle != null){
 			let curTitle = curArticle.find("h5").text();
 		//	let curText = curArticle.find("p").text();
 			let curText= curArticle[1].childNodes;
 			$('#cuTitleL').val(curTitle);
-			let j=1;
+			let j=0;
 			for(i=3; i<curText.length; i=i+2){
-				let text=curText[i].childNodes[1],href;
-				$('#cuTextL'+j).value=text;
+				text[j]=curText[i].childNodes[1].href;
 				j++;
 			}
+			$('#cuTextL1').val(text[0]);
+			$('#cuTextL2').val(text[1]);
+			$('#cuTextL3').val(text[2]);
+			$('#cuTextL4').val(text[3]);
+			$('#cuTextL5').val(text[4]);
+			$('#cuTextL6').val(text[5]);
+			$('#cuTextL7').val(text[6]);
 	}
 
 	// Display Modal
@@ -376,10 +383,15 @@ $('#create-btn-text').on('click', function(e){
 $('#create-btn-link').on('click', function(e){
 		curArticle = $(this).closest('#article');
 		// Setup "Create User" Modal
-		$('#cuModalLabel').text("Create Links");
-		$('#cuTitle').val("Links");
-		$('#cuText').val("");
-
+		$('#cuModalLabelL').text("Create Links");
+		$('#cuTitleL').val("");
+		$('#cuTextL1').val("");
+		$('#cuTextL2').val("");
+		$('#cuTextL3').val("");
+		$('#cuTextL4').val("");
+		$('#cuTextL5').val("");
+		$('#cuTextL6').val("");
+		$('#cuTextL7').val("");
 
 		// Display Modal
 		$('#cuModalLinks').modal();
@@ -392,13 +404,11 @@ $('#create-btn-picture').on('click', function(e){
 		});
 });
 $('#cuModalYesBtnL').on('click', function(e){
-		let modalTitle = $('#cuModalLabel').text();
-
+		let modalTitle = $('#cuModalLabelL').text();
 		if(modalTitle == "Update Article"){
 				$('#aysModalBody').text("This action will change the Article, are you sure you would like to continue?");
 				$('#aysModal').modal();
 		}else{
-
 				var div = document.createElement('div');
 				div.setAttribute('id', 'article');
 				div.setAttribute('class', 'd-flex w-100 justify-content-between');
@@ -427,17 +437,50 @@ $('#cuModalYesBtnL').on('click', function(e){
 				var divInner = document.createElement('div');
 				var h5 = document.createElement('h5');
 				h5.setAttribute('class','mb-1')
-				h5.append($('#cuTitle').val());
+				h5.append($('#cuTitleL').val());
 				divInner.append(h5);
-			//	for(int i=0; i<7; i++){
-		//			let link=j[i];
 					var p= document.createElement('p');
 					var a= document.createElement('a');
-					a.setAttribute('href',link);
-					a.append(link);
+					a.setAttribute('href',$('#cuTextL1').val());
+					a.append($('#cuTextL1').val());
 					p.append(a);
 					divInner.append(p);
-				//}
+					var p= document.createElement('p');
+					var a= document.createElement('a');
+					a.setAttribute('href',$('#cuTextL2').val());
+					a.append($('#cuTextL2').val());
+					p.append(a);
+					divInner.append(p);
+					var p= document.createElement('p');
+					var a= document.createElement('a');
+					a.setAttribute('href',$('#cuTextL3').val());
+					a.append($('#cuTextL3').val());
+					p.append(a);
+					divInner.append(p);
+					var p= document.createElement('p');
+					var a= document.createElement('a');
+					a.setAttribute('href',$('#cuTextL4').val());
+					a.append($('#cuTextL4').val());
+					p.append(a);
+					divInner.append(p);
+					var p= document.createElement('p');
+					var a= document.createElement('a');
+					a.setAttribute('href',$('#cuTextL5').val());
+					a.append($('#cuTextL5').val());
+					p.append(a);
+					divInner.append(p);
+					var p= document.createElement('p');
+					var a= document.createElement('a');
+					a.setAttribute('href',$('#cuTextL6').val());
+					a.append($('#cuTextL6').val());
+					p.append(a);
+					divInner.append(p);
+					var p= document.createElement('p');
+					var a= document.createElement('a');
+					a.setAttribute('href',$('#cuTextL7').val());
+					a.append($('#cuTextL7').val());
+					p.append(a);
+					divInner.append(p);
 				var divDrop=document.createElement('div');
 				divDrop.setAttribute('class','dropdown');
 				var aUp=document.createElement('a');
@@ -448,7 +491,7 @@ $('#cuModalYesBtnL').on('click', function(e){
 				aDown.setAttribute('onClick', 'down(this)');
 				var aEdit=document.createElement('a');
 				aEdit.setAttribute('class', 'dropdown-item');
-				aEdit.setAttribute('onClick', 'editPic(this)');
+				aEdit.setAttribute('onClick', 'editL(this)');
 				var aDelete=document.createElement('a');
 				aDelete.setAttribute('class', 'dropdown-item');
 				aDelete.setAttribute('onClick', 'deleted(this)');
@@ -495,9 +538,8 @@ $('#cuModalYesBtnL').on('click', function(e){
 				div.append(divDrop);
 				$('#articleList').append(div);
 		}
-
-		// Close modal
-		$('#cuModal').modal('hide');
+		text=[];
+		$('#cuModalLinks').modal('hide');
 });
 // Update/Create Modal "Save Changes" clicked
 $('#cuModalYesBtn').on('click', function(e){
