@@ -126,13 +126,25 @@
 											<div>
 													<h5 class="mb-1">Links</h5>
 													<p>
-													<a href="https://www.wdgpublichealth.ca/your-community/ticks-lyme-disease">ticks with lyme disease</a>
+													<a  href="https://www.wdgpublichealth.ca/your-community/ticks-lyme-disease">https://www.wdgpublichealth.ca/your-community/ticks-lyme-disease</a>
 												</p>
 												<p>
-													<a href="https://www.wdgpublichealth.ca/blog/lets-talk-ticks">lets talk ticks</a>
+													<a  href="https://www.wdgpublichealth.ca/blog/lets-talk-ticks">https://www.wdgpublichealth.ca/blog/lets-talk-ticks</a>
 											</p>
 											<p>
-													<a href="https://www.wdgpublichealth.ca/board-health/board-health-meetings/may-1-2019-agenda/bh01may0119c08-2018-tick-and-lyme-disease">2018 tick and lyme disease</a>
+													<a  href="https://www.wdgpublichealth.ca/board-health/board-health-meetings/may-1-2019-agenda/bh01may0119c08-2018-tick-and-lyme-disease">https://www.wdgpublichealth.ca/board-health/board-health-meetings/may-1-2019-agenda/bh01may0119c08-2018-tick-and-lyme-disease</a>
+											</p>
+											<p>
+													<a  href=""></a>
+											</p>
+											<p>
+													<a  href=""></a>
+											</p>
+											<p>
+													<a href=""></a>
+											</p>
+											<p>
+													<a href=""></a>
 											</p>
 											</div>
 											<div class="dropdown">
@@ -231,6 +243,23 @@
 							</div>
 						</div>
 				</div>
+				<!-- "Are you sure?" Modal -->
+				<div class="modal fade" id="aysModalL" tabindex="-1" role="dialog" aria-labelledby="aysModalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+								<div class="modal-content">
+										<div class="modal-header">
+												<h5 class="modal-title" id="aysModalLabel">Are you sure?</h5>
+										</div>
+										<div class="modal-body">
+												<h5 id="aysModalBodyL">Deleting a Article is irreversible, are you sure you would like to continue?</h5>
+										</div>
+										<div class="modal-footer">
+												<button id="aysModalYesBtnL" type="button" class="btn btn-primary">Yes</button>
+												<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+										</div>
+								</div>
+						</div>
+				</div>
 	<!-- "Are you sure?" Modal -->
 	<div class="modal fade" id="aysModal" tabindex="-1" role="dialog" aria-labelledby="aysModalLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
@@ -323,11 +352,13 @@ function editL(e){
 			if(curText[0].nodeName=='#text'){
 			for(i=3; i<curText.length; i=i+2){
 				text[j]=curText[i].childNodes[1].href;
+				if(text[j]=="file:///C:/Users/Jonah/Desktop/CIS-3750/education.html"){
+					text[j]='';
+				}
 				j++;
 			}
 			}else{
 				for(i=1; i<curText.length; i++){
-					console.log(curText[i]);
 
 					text[j]=curText[i].childNodes[0].href;
 					if(text[j]=="file:///C:/Users/Jonah/Desktop/CIS-3750/education.html"){
@@ -418,8 +449,8 @@ $('#create-btn-picture').on('click', function(e){
 $('#cuModalYesBtnL').on('click', function(e){
 		let modalTitle = $('#cuModalLabelL').text();
 		if(modalTitle == "Update Article"){
-				$('#aysModalBody').text("This action will change the Article, are you sure you would like to continue?");
-				$('#aysModal').modal();
+				$('#aysModalBodyL').text("This action will change the Article, are you sure you would like to continue?");
+				$('#aysModalL').modal();
 		}else{
 				var div = document.createElement('div');
 				div.setAttribute('id', 'article');
@@ -459,6 +490,7 @@ $('#cuModalYesBtnL').on('click', function(e){
 					divInner.append(p);
 					var p= document.createElement('p');
 					var a= document.createElement('a');
+
 					a.setAttribute('href',$('#cuTextL2').val());
 					a.append($('#cuTextL2').val());
 					p.append(a);
@@ -742,7 +774,6 @@ $('#cuModalYesBtn').on('click', function(e){
 
 		// Close modal
 		$('#cuModal').modal('hide');
-		$('#savedModal').modal('show');
 });
 
 // "Are you sure?" Yes btn clicked
@@ -755,9 +786,32 @@ $('#aysModalYesBtn').on('click', function(e){
 				}else{ // AYS for update
 						curArticle.find('h5').text($('#cuTitle').val());
 						curArticle.find('small').text($('#cuText').val());
-
-
 				}
+		}
+});
+
+// "Are you sure?" Yes btn clicked
+$('#aysModalYesBtnL').on('click', function(e){
+		$("#aysModalL").modal('hide');
+		let aysBody = $('#aysModalBodyL').text();
+		if(curArticle != null){
+			console.log(curArticle.find('a'));
+						curArticle.find('h5').text($('#cuTitleL').val());
+						curArticle.find('a')[0].href=($('#cuTextL1').val());
+						curArticle.find('a')[1].href=($('#cuTextL2').val());
+						curArticle.find('a')[2].href=($('#cuTextL3').val());
+						curArticle.find('a')[3].href=($('#cuTextL4').val());
+						curArticle.find('a')[4].href=($('#cuTextL5').val());
+						curArticle.find('a')[5].href=($('#cuTextL6').val());
+						curArticle.find('a')[6].href=($('#cuTextL7').val());
+						curArticle.find('a')[0].textContent=($('#cuTextL1').val());
+						curArticle.find('a')[1].textContent=($('#cuTextL2').val());
+						curArticle.find('a')[2].textContent=($('#cuTextL3').val());
+						curArticle.find('a')[3].textContent=($('#cuTextL4').val());
+						curArticle.find('a')[4].textContent=($('#cuTextL5').val());
+						curArticle.find('a')[5].textContent=($('#cuTextL6').val());
+						curArticle.find('a')[6].textContent=($('#cuTextL7').val());
+
 		}
 });
 
