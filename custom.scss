@@ -1,0 +1,10 @@
+
+$theme-colors: (
+  "primary": #00928F,
+  "secondary": #919195,
+  "success": #78A22F,
+  "info": #005568,
+);
+
+// Import must be at end or bootstrap will override colors
+@import "node_modules/bootstrap/scss/bootstrap";
