@@ -14,6 +14,7 @@
         <title>Welcome!</title>
 	</head>
 	<body>
+
 		<!--Navbar-->
 		 <nav class="navbar navbar-expand-lg navbar-custom">
 				 <a class="navbar-brand" href="home.html"><img style="background-color: #ffffff" src="images/logo.png"/><strong> TickedOff Web Portal</strong></a>
@@ -61,11 +62,13 @@
 						<h5 class="modal-title">Create new password</h5>
 						</div>
 						<div class="modal-body">
-							Password: <br><input type="password" size="32"><br>
-							Verify Password: <br><input type="password" size="32"><br>
+                            <b><div id="passMsg"></div></b>
+							Password: <br><input id="pwdInput" type="password" size="32"><br>
+                            Verify Password: <br><input id="vpwdInput" type="password" size="32"><br>
+                            <b>The new password must be at least 8 characters long and contain at least an uppercase letter, a number and a symbol</b>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-primary" data-dismiss="modal">Create new password</button>
+							<button type="button" class="btn btn-primary" id="createPassBtn">Create new password</button>
 						</div>
 					</div>
 				</div>
@@ -103,6 +106,42 @@
 		</div>
 
     <script>
+        function checkValidPass(pass)
+        {
+            let number = false;
+            let capLetter = false;
+            let symRegEx = /[ !"#$%&'()*+\-./:;<=>?@^_{|}~]/;
+
+            if (pass.length < 8)
+            {
+                return false;
+            }
+
+            for (i = 0; i < pass.length; i++)
+            {
+                let tmpChar = pass.charCodeAt(i);
+                if (tmpChar >= 48 && tmpChar <= 57)
+                {
+                    number = true;
+                }
+                else if (tmpChar >= 65 && tmpChar <= 90)
+                {
+                    capLetter = true;
+                }
+            }
+
+            if (symRegEx.test(pass) == false)
+            {
+                return false;
+            }
+
+            if (number == true && capLetter == true)
+            {
+                return true;
+            }
+
+            return false;
+        }
         $( document ).ready(function() {
             if (!sessionStorage.getItem("doneNewPass"))
             {
@@ -111,6 +150,26 @@
             }
         });
 
+        $("#createPassBtn").on("click", function(e)
+        {
+            let passVal = $("#pwdInput").val();
+            let vpassVal = $("#vpwdInput").val();
+
+            if (passVal != vpassVal)
+            {
+                $("#passMsg").text("Passwords do not match.");
+                return;
+            }
+
+            if (checkValidPass(passVal) == false)
+            {
+                $("#passMsg").text("Passwords do not meet required criteria.");
+                return;
+            }
+
+            $("#newPass").modal("hide");
+
+        });
 				function logoutays(){
 					$('#logoutaysModal').modal('show');
 				}
