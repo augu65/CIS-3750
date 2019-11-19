@@ -55,6 +55,7 @@
         <!-- MAIN LIST CONTENT -->
         <div class="container border border-secondary rounded">
             <h1 id="users-heading">Registered Users</h1>
+			<input id="archive-hide" type="checkbox">Hide Archived Users</input>
             <div class="list-group">
                 <a href="#" class="list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-between">
@@ -63,7 +64,7 @@
                             <small class="text-muted">admin@wdgpublichealth.ca</small>
                         </div>
                         <div class="btn-group pull-right" role="group" aria-label="user-options">
-                            <button type="button" class="tick-update btn btn-outline-secondary">Update</button>
+                            <button type="button" class="tick-update btn btn-outline-primary">Update</button>
                         </div>
                     </div>
                 </a>
@@ -74,7 +75,8 @@
                             <small class="text-muted">bob.star@wdgpublichealth.ca</small>
                         </div>
                         <div class="btn-group pull-right" role="group" aria-label="user-options">
-                            <button type="button" class="tick-update btn btn-outline-secondary">Update</button>
+                            <button type="button" class="tick-update btn btn-outline-primary">Update</button>
+							<button type="button" class="tick-archive btn btn-outline-secondary">Archive</button>
                             <button type="button" class="tick-delete btn btn-outline-secondary"><img src="images/trash.svg"/></button>
                         </div>
                     </div>
@@ -86,7 +88,8 @@
                             <small class="text-muted">sam.jones@wdgpublichealth.ca</small>
                         </div>
                         <div class="btn-group pull-right" role="group" aria-label="user-options">
-                            <button type="button" class="tick-update btn btn-outline-secondary">Update</button>
+                            <button type="button" class="tick-update btn btn-outline-primary">Update</button>
+							<button type="button" class="tick-archive btn btn-outline-secondary">Archive</button>
                             <button type="button" class="tick-delete btn btn-outline-secondary"><img src="images/trash.svg"/></button>
                         </div>
                     </div>
@@ -173,8 +176,39 @@
                 curUser = $(this).closest('a');
             });
 
+			// Archive user btn clicked
+			$(document).on('click', '.tick-archive', function(e){
+				curUser = $(this).closest('a');
+				if(curUser.hasClass('archived')){ // User is being un-archived
+					curUser.removeClass('archived');
+					$(this).text("Archive");
+
+					$(this).before('<button type="button" class="tick-update btn btn-outline-primary">Update</button>');
+					$(this).after('<button type="button" class="tick-delete btn btn-outline-secondary"><img src="images/trash.svg"/></button>');
+				}else{ // User is being archived
+					curUser.addClass('archived');
+					$(this).text("Unarchive");
+					let deleteBtn = curUser.find('.tick-delete');
+					deleteBtn.remove();
+					let updateBtn = curUser.find('.tick-update');
+					updateBtn.remove();
+				}
+			});
+
+
+			// Handle hide archived checkbox checked
+			$("#archive-hide").change(function(){
+				if($(this).is(':checked')){
+					console.log("checked");
+					$('.archived').hide();
+				}else{
+					console.log("unchecked");
+					$('.archived').show();
+				}
+			});
+
             // Update user btn clicked
-            $('.tick-update').on('click', function(e){
+            $(document).on('click', '.tick-update', function(e){
                 curUser = $(this).closest('a');
 
                 // If updating admin user, redirect to profile.html
@@ -228,13 +262,27 @@
 
                     // Ensure tick-delete class exists, otherwise add delete btn to list item
                     if(!new_user.find('.tick-delete').length){
-                        new_user.find('.btn-group').append('<button type="button" class="tick-delete btn btn-outline-secondary"><img src="images/trash.svg"/></button>');
+						let btn_group = new_user.find('.btn-group');
+						btn_group.append('<button type="button" class="tick-archive btn btn-outline-secondary">Archive</button>');
+                        btn_group.append('<button type="button" class="tick-delete btn btn-outline-secondary"><img src="images/trash.svg"/></button>');
+						
                     }
+
+					// ensure user isn't accidently auto-archived
+					console.log(new_user.find('.tick-archive').text());
+					if(new_user.find('.tick-archive').text() == "Unarchive"){
+						let archiveBtn = new_user.find('tick-archive');
+						archivebtn.before('<button type="button" class="tick-update btn btn-primary">Update</button>');
+						archivebtn.after('<button type="button" class="tick-delete btn btn-secondary"><img src="images/trash.svg"/></button>');
+
+						new_user.removeClass('archived');
+					}
 
                     // Add new user to page
                     new_user.find('h5').text($('#cuName').val());
                     new_user.find('small').text($('#cuEmail').val());
                     new_user.appendTo('.list-group');
+
                 }
 
                 // Close modal
