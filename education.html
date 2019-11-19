@@ -85,7 +85,7 @@
 								<button onclick="down(this)" type="button" class="tick-down btn btn-outline-secondary"><i class='fas fa-chevron-down' style='font-size:24px'></i></button>
 								</div>
 											<div>
-													<img style="border: thin solid black;"src="images/X.png" alt="Picture of a tick.">
+													<img style="border: thin solid black;"src="images/tick.jpg" alt="Picture of a tick.">
 											</div>
 											<div class="dropdown">
 											<button onclick="myFunction(this)" class="dropbtn"><i class='fas fa-ellipsis-v' style='font-size:24px'></i></button>
@@ -117,9 +117,50 @@
 								  <a  onclick="deleted(this)"class="dropdown-item"	<button type="button" class="tick-delete btn btn-outline-secondary"><img src="images/trash.svg"/></button></a>
 								  <a onclick="down(this)" class="dropdown-item"	<button type="button" class="tick-down btn btn-outline-secondary"><i class='fas fa-chevron-down' style='font-size:24px'></i></button></a>
 									</div>
-							</div>
+								</div>
 
 							</div>
+
+							<div id= "article"class="d-flex w-100 justify-content-between" style="border: thin solid black;">
+								<div class="btn-group-vertical" style="padding:10px;">
+								<button onclick="up(this)" type="button" class="tick-up btn btn-outline-secondary"><i class='fas fa-chevron-up' style='font-size:24px'></i></button>
+								<button onclick="down(this)" type="button" class="tick-down btn btn-outline-secondary"><i class='fas fa-chevron-down' style='font-size:24px'></i></button>
+								</div>
+											<div>
+													<h5 class="mb-1">Links</h5>
+													<p>
+													<a  href="https://www.wdgpublichealth.ca/your-community/ticks-lyme-disease">https://www.wdgpublichealth.ca/your-community/ticks-lyme-disease</a>
+												</p>
+												<p>
+													<a  href="https://www.wdgpublichealth.ca/blog/lets-talk-ticks">https://www.wdgpublichealth.ca/blog/lets-talk-ticks</a>
+											</p>
+											<p>
+													<a  href="https://www.wdgpublichealth.ca/board-health/board-health-meetings/may-1-2019-agenda/bh01may0119c08-2018-tick-and-lyme-disease">https://www.wdgpublichealth.ca/board-health/board-health-meetings/may-1-2019-agenda/bh01may0119c08-2018-tick-and-lyme-disease</a>
+											</p>
+											<p>
+													<a  href=""></a>
+											</p>
+											<p>
+													<a  href=""></a>
+											</p>
+											<p>
+													<a href=""></a>
+											</p>
+											<p>
+													<a href=""></a>
+											</p>
+											</div>
+											<div class="dropdown">
+											<button onclick="myFunction(this)" class="dropbtn"><i class='fas fa-ellipsis-v' style='font-size:24px'></i></button>
+											<div id="myDropdown" class="dropdown-content">
+											<a  onclick="up(this)" class="dropdown-item"	<button type="button" class="tick-up btn btn-outline-secondary"><i class='fas fa-chevron-up' style='font-size:24px'></i></button></a>
+											<a  onclick="editL(this)"class="dropdown-item"	<button type="button" class="tick-edit btn btn-outline-secondary">Edit</button></a>
+											<a  onclick="deleted(this)"class="dropdown-item"	<button type="button" class="tick-delete btn btn-outline-secondary"><img src="images/trash.svg"/></button></a>
+											<a onclick="down(this)" class="dropdown-item"	<button type="button" class="tick-down btn btn-outline-secondary"><i class='fas fa-chevron-down' style='font-size:24px'></i></button></a>
+											</div>
+										</div>
+
+									</div>
 
 
 
@@ -152,6 +193,40 @@
 					</div>
 			</div>
 	</div>
+	<!-- Create/Update Modal -->
+	<div class="modal fade" id="cuModalLinks" tabindex="-1" role="dialog" aria-labelledby="cuModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+					<div class="modal-content">
+							<div class="modal-header">
+									<h5 class="modal-title" id="cuModalLabelL">Update Links</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+									</button>
+							</div>
+							<div class="modal-body">
+									<form>
+											<div class="form-group">
+													<input id="cuTitleL" type="text" class="form-control" placeholder="Title"/>
+											</div>
+											<div class="form-group" height="100%">
+													<input id="cuTextL1"  style="padding:10px;"type="text" class="form-control" placeholder="Link"></input>
+													<input id="cuTextL2"  style="padding:10px;"type="text" class="form-control" placeholder="Link"></input>
+													<input id="cuTextL3"  style="padding:10px;"type="text" class="form-control" placeholder="Link"></input>
+													<input id="cuTextL4"  style="padding:10px;"type="text" class="form-control" placeholder="Link"></input>
+													<input id="cuTextL5"  style="padding:10px;"type="text" class="form-control" placeholder="Link"></input>
+													<input id="cuTextL6"  style="padding:10px;"type="text" class="form-control" placeholder="Link"></input>
+													<input id="cuTextL7"  style="padding:10px;"type="text" class="form-control" placeholder="Link"></input>
+											</div>
+									</form>
+							</div>
+							<div class="modal-footer">
+									<button id="cuModalYesBtnL" type="button" class="btn btn-primary">Save changes</button>
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+							</div>
+					</div>
+			</div>
+	</div>
+
 
 	<!-- "create Articles" Modal -->
 	<div class="modal fade" id="cuModalCreate" tabindex="-1" role="dialog" aria-labelledby="cuModalLabel" aria-hidden="true">
@@ -166,8 +241,26 @@
 									<div class="modal-body" align= "center">
 											<button id="create-btn-text" type="button" class="btn btn-secondary" data-dismiss="modal">Create Text</button>
 											<button  id="create-btn-picture" type="button" class="btn btn-secondary" data-dismiss="modal">Create Picture</button>
+											<button  id="create-btn-link" type="button" class="btn btn-secondary" data-dismiss="modal">Create Link</button>
 									</div>
 							</div>
+						</div>
+				</div>
+				<!-- "Are you sure?" Modal -->
+				<div class="modal fade" id="aysModalL" tabindex="-1" role="dialog" aria-labelledby="aysModalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+								<div class="modal-content">
+										<div class="modal-header">
+												<h5 class="modal-title" id="aysModalLabel">Are you sure?</h5>
+										</div>
+										<div class="modal-body">
+												<h5 id="aysModalBodyL">Deleting a Article is irreversible, are you sure you would like to continue?</h5>
+										</div>
+										<div class="modal-footer">
+												<button id="aysModalYesBtnL" type="button" class="btn btn-primary">Yes</button>
+												<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+										</div>
+								</div>
 						</div>
 				</div>
 	<!-- "Are you sure?" Modal -->
@@ -248,6 +341,47 @@ function edit(e){
 	// Display Modal
 	$("#cuModal").modal();
 }
+var text=[7];
+function editL(e){
+	curArticle = $(e).closest('#article').find("div");
+	// Setup "Update Article" Modal
+	$("#cuModalLabelL").text("Update Article");
+	if(curArticle != null){
+			let curTitle = curArticle.find("h5").text();
+		//	let curText = curArticle.find("p").text();
+			let curText= curArticle[1].childNodes;
+			$('#cuTitleL').val(curTitle);
+			let j=0;
+			if(curText[0].nodeName=='#text'){
+			for(i=3; i<curText.length; i=i+2){
+				text[j]=curText[i].childNodes[1].href;
+				if(text[j]=="file:///C:/Users/Jonah/Desktop/CIS-3750/education.html"){
+					text[j]='';
+				}
+				j++;
+			}
+			}else{
+				for(i=1; i<curText.length; i++){
+
+					text[j]=curText[i].childNodes[0].href;
+					if(text[j]=="file:///C:/Users/Jonah/Desktop/CIS-3750/education.html"){
+						text[j]='';
+					}
+					j++;
+				}
+			}
+			$('#cuTextL1').val(text[0]);
+			$('#cuTextL2').val(text[1]);
+			$('#cuTextL3').val(text[2]);
+			$('#cuTextL4').val(text[3]);
+			$('#cuTextL5').val(text[4]);
+			$('#cuTextL6').val(text[5]);
+			$('#cuTextL7').val(text[6]);
+	}
+	text=[];
+	// Display Modal
+	$("#cuModalLinks").modal();
+}
 function editPic(e){
   $("#fileLoader").click();
 }
@@ -291,13 +425,169 @@ $('#create-btn-text').on('click', function(e){
 		// Display Modal
 		$('#cuModal').modal();
 });
+// Create new user btn clicked
+$('#create-btn-link').on('click', function(e){
+		curArticle = $(this).closest('#article');
+		// Setup "Create User" Modal
+		$('#cuModalLabelL').text("Create Links");
+		$('#cuTitleL').val("");
+		$('#cuTextL1').val("");
+		$('#cuTextL2').val("");
+		$('#cuTextL3').val("");
+		$('#cuTextL4').val("");
+		$('#cuTextL5').val("");
+		$('#cuTextL6').val("");
+		$('#cuTextL7').val("");
+
+		// Display Modal
+		$('#cuModalLinks').modal();
+});
+
 $('#create-btn-picture').on('click', function(e){
 	 $("#fileLoader").click().change(function(){
 			$("#cuModalYesBtn").click();
 				$("#fileLoader").stopPropagation();
 		});
 });
+$('#cuModalYesBtnL').on('click', function(e){
+		let modalTitle = $('#cuModalLabelL').text();
+		if(modalTitle == "Update Article"){
+				$('#aysModalBodyL').text("This action will change the Article, are you sure you would like to continue?");
+				$('#aysModalL').modal();
+		}else{
+				var div = document.createElement('div');
+				div.setAttribute('id', 'article');
+				div.setAttribute('class', 'd-flex w-100 justify-content-between');
+				div.setAttribute('style', 'border: thin solid black;');
+				var buttonDiv=document.createElement('div');
+				buttonDiv.setAttribute('class', 'btn-group-vertical');
+				buttonDiv.setAttribute('style', 'padding:10px;');
+				var buttonUp=document.createElement('button');
+				buttonUp.setAttribute('class', 'tick-up btn btn-outline-secondary');
+				buttonUp.setAttribute('type', 'button');
+				buttonUp.setAttribute('onClick', 'up(this)');
+				var upIcon=document.createElement('i');
+				upIcon.setAttribute('class', 'fas fa-chevron-up');
+				upIcon.setAttribute('style', 'font-size:24px');
+				var buttonDown=document.createElement('button');
+				buttonDown.setAttribute('class', 'tick-up btn btn-outline-secondary');
+				buttonDown.setAttribute('type', 'button');
+				buttonDown.setAttribute('onClick', 'down(this)');
+				var downIcon=document.createElement('i');
+				downIcon.setAttribute('class', 'fas fa-chevron-down');
+				downIcon.setAttribute('style', 'font-size:24px');
+				buttonUp.append(upIcon);
+				buttonDown.append(downIcon);
+				buttonDiv.append(buttonUp);
+				buttonDiv.append(buttonDown);
+				var divInner = document.createElement('div');
+				var h5 = document.createElement('h5');
+				h5.setAttribute('class','mb-1')
+				h5.append($('#cuTitleL').val());
+				divInner.append(h5);
+					var p= document.createElement('p');
+					var a= document.createElement('a');
+					a.setAttribute('href',$('#cuTextL1').val());
+					a.append($('#cuTextL1').val());
+					p.append(a);
+					divInner.append(p);
+					var p= document.createElement('p');
+					var a= document.createElement('a');
 
+					a.setAttribute('href',$('#cuTextL2').val());
+					a.append($('#cuTextL2').val());
+					p.append(a);
+					divInner.append(p);
+					var p= document.createElement('p');
+					var a= document.createElement('a');
+					a.setAttribute('href',$('#cuTextL3').val());
+					a.append($('#cuTextL3').val());
+					p.append(a);
+					divInner.append(p);
+					var p= document.createElement('p');
+					var a= document.createElement('a');
+					a.setAttribute('href',$('#cuTextL4').val());
+					a.append($('#cuTextL4').val());
+					p.append(a);
+					divInner.append(p);
+					var p= document.createElement('p');
+					var a= document.createElement('a');
+					a.setAttribute('href',$('#cuTextL5').val());
+					a.append($('#cuTextL5').val());
+					p.append(a);
+					divInner.append(p);
+					var p= document.createElement('p');
+					var a= document.createElement('a');
+					a.setAttribute('href',$('#cuTextL6').val());
+					a.append($('#cuTextL6').val());
+					p.append(a);
+					divInner.append(p);
+					var p= document.createElement('p');
+					var a= document.createElement('a');
+					a.setAttribute('href',$('#cuTextL7').val());
+					a.append($('#cuTextL7').val());
+					p.append(a);
+					divInner.append(p);
+				var divDrop=document.createElement('div');
+				divDrop.setAttribute('class','dropdown');
+				var aUp=document.createElement('a');
+				aUp.setAttribute('class', 'dropdown-item');
+				aUp.setAttribute('onClick', 'up(this)');
+				var aDown=document.createElement('a');
+				aDown.setAttribute('class', 'dropdown-item');
+				aDown.setAttribute('onClick', 'down(this)');
+				var aEdit=document.createElement('a');
+				aEdit.setAttribute('class', 'dropdown-item');
+				aEdit.setAttribute('onClick', 'editL(this)');
+				var aDelete=document.createElement('a');
+				aDelete.setAttribute('class', 'dropdown-item');
+				aDelete.setAttribute('onClick', 'deleted(this)');
+				var upIcon2=document.createElement('i');
+				upIcon2.setAttribute('class', 'fas fa-chevron-up');
+				upIcon2.setAttribute('style', 'font-size:24px');
+				var downIcon2=document.createElement('i');
+				downIcon2.setAttribute('class', 'fas fa-chevron-down');
+				downIcon2.setAttribute('style', 'font-size:24px;');
+				var buttonEdit=document.createElement('button');
+				buttonEdit.setAttribute('class', 'tick-up btn btn-outline-secondary');
+				buttonEdit.setAttribute('type', 'button');
+				var deleted=document.createElement('img');
+				deleted.setAttribute('src', 'images/trash.svg');
+				var buttonMenu=document.createElement('button');
+				buttonMenu.setAttribute('class', 'dropbtn');
+				buttonMenu.setAttribute('onClick', 'myFunction(this)');
+				var menu=document.createElement('i');
+				menu.setAttribute('class', 'fas fa-ellipsis-v');
+				menu.setAttribute('style', 'font-size:24px');
+				var input=document.createElement('input');
+				input.setAttribute('type', 'file');
+				input.setAttribute('id', 'fileLoader');
+				input.setAttribute('title', 'Load File');
+				input.setAttribute('name', 'files');
+				input.setAttribute('accept', 'image/*');
+				buttonMenu.append(menu);
+				divDrop.append(buttonMenu);
+				aUp.append(upIcon2);
+				aDown.append(downIcon2);
+				aDelete.append(deleted);
+				aEdit.innerHTML="Edit";
+				var dropdownDiv=document.createElement('div');
+				dropdownDiv.setAttribute('id','myDropdown');
+				dropdownDiv.setAttribute('class','dropdown-content');
+				dropdownDiv.append(aUp);
+				dropdownDiv.append(aEdit);
+				dropdownDiv.append(aDelete);
+				dropdownDiv.append(aDown);
+				dropdownDiv.append(input);
+				divDrop.append(dropdownDiv);
+				div.append(buttonDiv);
+				div.append(divInner);
+				div.append(divDrop);
+				$('#articleList').append(div);
+		}
+		text=[];
+		$('#cuModalLinks').modal('hide');
+});
 // Update/Create Modal "Save Changes" clicked
 $('#cuModalYesBtn').on('click', function(e){
 		let modalTitle = $('#cuModalLabel').text();
@@ -487,7 +777,6 @@ $('#cuModalYesBtn').on('click', function(e){
 
 		// Close modal
 		$('#cuModal').modal('hide');
-		$('#savedModal').modal('show');
 });
 
 // "Are you sure?" Yes btn clicked
@@ -500,9 +789,32 @@ $('#aysModalYesBtn').on('click', function(e){
 				}else{ // AYS for update
 						curArticle.find('h5').text($('#cuTitle').val());
 						curArticle.find('small').text($('#cuText').val());
-
-
 				}
+		}
+});
+
+// "Are you sure?" Yes btn clicked
+$('#aysModalYesBtnL').on('click', function(e){
+		$("#aysModalL").modal('hide');
+		let aysBody = $('#aysModalBodyL').text();
+		if(curArticle != null){
+			console.log(curArticle.find('a'));
+						curArticle.find('h5').text($('#cuTitleL').val());
+						curArticle.find('a')[0].href=($('#cuTextL1').val());
+						curArticle.find('a')[1].href=($('#cuTextL2').val());
+						curArticle.find('a')[2].href=($('#cuTextL3').val());
+						curArticle.find('a')[3].href=($('#cuTextL4').val());
+						curArticle.find('a')[4].href=($('#cuTextL5').val());
+						curArticle.find('a')[5].href=($('#cuTextL6').val());
+						curArticle.find('a')[6].href=($('#cuTextL7').val());
+						curArticle.find('a')[0].textContent=($('#cuTextL1').val());
+						curArticle.find('a')[1].textContent=($('#cuTextL2').val());
+						curArticle.find('a')[2].textContent=($('#cuTextL3').val());
+						curArticle.find('a')[3].textContent=($('#cuTextL4').val());
+						curArticle.find('a')[4].textContent=($('#cuTextL5').val());
+						curArticle.find('a')[5].textContent=($('#cuTextL6').val());
+						curArticle.find('a')[6].textContent=($('#cuTextL7').val());
+
 		}
 });
 
