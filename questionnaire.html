@@ -5,9 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="stylesheet" type="text/css" href="stuff.css"/>
         <link rel="stylesheet" type="text/css" href="manage.css"/>
-        <link rel="stylesheet" href="custom.css"/> <!-- Bootstrap styling override -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
 
-        <title>User Management</title>
+        <title>Questionnaire Management</title>
     </head>
     <body>
         <!-- NAVBAR // START -->
@@ -25,13 +25,13 @@
                     <li class="nav-item">
                         <a class="nav-link" href="reskin.html">Reskin</a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="manage.html">Manage Accounts</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="education.html">Educational Material</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="questionnaire.html">Manage Questionnaire<span class="sr-only">(current)</span></a>
                     </li>
                 </ul>
@@ -53,47 +53,99 @@
 
         <!-- MAIN LIST CONTENT -->
         <div class="container border border-secondary rounded">
-            <h1 id="users-heading">Registered Users</h1>
-            <div class="list-group">
+            <h1 id="users-heading">Questionnaire Questions</h1>
+            <div id='listDiv' class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <div>
+                                    <h6 class="qtext mb-1">In which township did the bite occur?</h6>
+                                </div>
+                                <div class="btn-group pull-right" role="group" aria-label="user-options">
+                                    <button type="button" class="q-edit btn btn-outline-secondary">Edit</button>
+                                    <button type="button" class="q-delete btn btn-outline-secondary"><img src="images/trash.svg"/></button>
+                                </div>
+                            </div>
+                        </a>
                 <a href="#" class="list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-between">
                         <div>
-                            <h5 class="mb-1">Admin</h5>
-                            <small class="text-muted">admin@wdgpublichealth.ca</small>
+                            <h6 class="qtext mb-1">Is the tick currently attached?</h6>
                         </div>
                         <div class="btn-group pull-right" role="group" aria-label="user-options">
-                            <button type="button" class="tick-update btn btn-outline-secondary">Update</button>
+                            <button type="button" class="q-edit btn btn-outline-secondary">Edit</button>
+                            <button type="button" class="q-delete btn btn-outline-secondary"><img src="images/trash.svg"/></button>
                         </div>
                     </div>
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-between">
                         <div>
-                            <h5 class="mb-1">Bob Star</h5>
-                            <small class="text-muted">bob.star@wdgpublichealth.ca</small>
+                            <h6 class="qtext mb-1">To what is the tick attached?</h6>
                         </div>
                         <div class="btn-group pull-right" role="group" aria-label="user-options">
-                            <button type="button" class="tick-update btn btn-outline-secondary">Update</button>
-                            <button type="button" class="tick-delete btn btn-outline-secondary"><img src="images/trash.svg"/></button>
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-between">
-                        <div>
-                            <h5 class="mb-1">Sam Jones</h5>
-                            <small class="text-muted">sam.jones@wdgpublichealth.ca</small>
-                        </div>
-                        <div class="btn-group pull-right" role="group" aria-label="user-options">
-                            <button type="button" class="tick-update btn btn-outline-secondary">Update</button>
-                            <button type="button" class="tick-delete btn btn-outline-secondary"><img src="images/trash.svg"/></button>
+                            <button type="button" class="q-edit btn btn-outline-secondary">Edit</button>
+                            <button type="button" class="q-delete btn btn-outline-secondary"><img src="images/trash.svg"/></button>
                         </div>
                     </div>
                 </a>
             </div>
         </div>
 
+        <!--Delete modal-->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="aysModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Are you sure?</h5>
+                    </div>
+                    <div class="modal-body">
+                        <h5>Are you sure you would like to delete this question?</h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="deleteModalYesBtn" type="button" class="btn btn-primary">Yes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Edit Modal-->
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="aysModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit Question</h5>
+                        </div>
+                        <div class="modal-body">
+                            <h5><textarea id='qEditInput' rows='3' cols='37'></textarea></h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="editModalBtn" type="button" class="btn btn-primary">Save Changes</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        <!--Create Modal-->
+        <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="aysModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Create Question</h5>
+                        </div>
+                        <div class="modal-body">
+                            <h5><textarea id='qCreateInput' rows='3' cols='37'></textarea></h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="createModalBtn" type="button" class="btn btn-primary">Create Question</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         <!-- Create/Update Modal -->
+        <!--
         <div class="modal fade" id="cuModal" tabindex="-1" role="dialog" aria-labelledby="cuModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -121,8 +173,10 @@
                 </div>
             </div>
         </div>
+    -->
 
         <!-- "Are you sure?" Modal -->
+        <!--
         <div class="modal fade" id="aysModal" tabindex="-1" role="dialog" aria-labelledby="aysModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -139,8 +193,10 @@
                 </div>
             </div>
         </div>
+        -->
 
         <!-- logout Modal -->
+        <!--
      	 <div class="modal fade" id="logoutaysModal" tabindex="-1" role="dialog" aria-labelledby="aysModalLabel" aria-hidden="true">
      			<div class="modal-dialog" role="document">
      					<div class="modal-content">
@@ -154,13 +210,16 @@
      					</div>
      			</div>
      	 </div>
-
+        -->
         <!-- JQUERY (BOOTSTRAP DEPENDENCY) -->
         <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
         <!-- BOOTSTRAP INCLUDE -->
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
         <!-- CUSTOM DYNAMIC UI FUNCTIONALITY -->
+
+        <script src='qscript.js'></script>
+        <!--
         <script>
             let curUser = null;
 
@@ -258,5 +317,6 @@
         			$('#logoutaysModal').modal('show');
         		}
         </script>
+    -->
     </body>
 </html>
