@@ -180,7 +180,7 @@
                 // If updating admin user, redirect to profile.html
                 if(curUser.find('h5').text() == "Admin"){
                     window.location.href = "profile.html";
-                }
+                }else{
 
                 // Setup "Update User" Modal
                 $("#cuModalLabel").text("Update User");
@@ -193,6 +193,7 @@
 
                 // Display Modal
                 $("#cuModal").modal();
+              }
             });
 
             // Create new user btn clicked
