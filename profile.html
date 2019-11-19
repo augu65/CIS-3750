@@ -53,17 +53,18 @@
 			<br>
 			<div class="container">
 				<h1 id="profileHeader">Profile</h1>
+				<p class="starSymbol">*These fields are required</p>
 				<form>
 					<div class="form-group">
-						<label for="username">*Name:&nbsp;&nbsp;</label>
+						<label for="username"><span class="starSymbol">*</span>Name:&nbsp;&nbsp;</label>
 						<input class="form-control" type="text" id="userName" name="username" placeholder="Enter name" value="Admin"/>
 					</div>
 					<div class="form-group">
-						<label for="email" required>Email:&nbsp;</label>
+						<label for="email" required><span class="starSymbol">*</span>Email:&nbsp;</label>
 						<input class="form-control" type="text" id="userEmail" placeholder="Enter email" value="admin@wdgph.ca"/>
 					</div>
 					<div class="form-group">
-						<label for="oldPswd">*Old Password:&nbsp&nbsp</label>
+						<label for="oldPswd"><span class="starSymbol">*</span>Current Password:&nbsp&nbsp</label>
 						<input class="form-control" type="password" id="userOldPswd" name="oldPswd" required>
 					</div>
 					<div class="form-group">
@@ -92,7 +93,7 @@
 						<h5 class="modal-title" id="savedModalLabel">Saved!</h5>
 					</div>
 					<div class="modal-body">
-						<h5 id="savedModalBody">User account changes have been saved.</h5>
+						<h5 id="savedModalBody">User profile changes have been saved.</h5>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
@@ -192,20 +193,26 @@
 				var oldPswd = document.getElementById("userOldPswd").value;
 				var newPswd1 = document.getElementById("userNewPswd1").value;
 				var newPswd2 = document.getElementById("userNewPswd2").value;
-				//If new pswd doesn't match verify new pswd trigger "Passwords not match" modal
-				if (newPswd1 != newPswd2) {
-					e.preventDefault();
-					$("#checkPswdsModal").modal();
-				} else {
-					if (oldPswd != "") {	//if old password is provided, show "are you sure" modal
+
+				if (oldPswd != "") {
+					if (newPswd1 != newPswd2) {    //newPswd1 and newPswd 2 don't match
 						e.preventDefault();
-						if (checkValidPass(newPswd1)) {
+						$("#checkPswdsModal").modal();
+					} else { //newPswd1 and newPswd2 matches
+						if (newPswd1 != "") {  //newPswd is provided check that it meets the required criteria
+							e.preventDefault();
+							if (checkValidPass(newPswd1)) { // New pswd passed the criteria test
+								$('#aysModal').modal();
+							} else {
+								$('#invPswdModal').modal();
+							}
+						} else {    //if not provided, Are you sure model opens up
+							e.preventDefault();
 							$('#aysModal').modal();
-						} else {
-							$('#invPswdModal').modal();
-						}
+						}						
 					}
 				}
+
 			});
 
 			//On clicking Yes on "Are you sure" modal
@@ -236,7 +243,6 @@
                 let capLetter = false;
 				let symRegEx = /[ !"#$%&'()*+\-./:;<=>?@^_{|}~]/;
 
-				console.log("validating pswds");
                 if (pass.length < 8)
                 {
                     return false;

@@ -1,3 +1,7 @@
 html .container{
 	overflow-y: hidden;
 }
+
+.starSymbol {
+	color: red;
+}
