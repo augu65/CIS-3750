@@ -27,3 +27,16 @@ body > .container{
 #user_avatar{
     margin: 10px 0;
 }
+
+.archived{
+	background-color: #666666 !important;
+	color: black !important;
+}
+
+.archived button{
+	color: black !important;
+}
+
+.archived small{
+	color: black !important;
+}
