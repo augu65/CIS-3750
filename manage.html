@@ -55,7 +55,13 @@
         <!-- MAIN LIST CONTENT -->
         <div class="container border border-secondary rounded">
             <h1 id="users-heading">Registered Users</h1>
-			<input id="archive-hide" type="checkbox">Hide Archived Users</input>
+
+            <!-- HIDE ARCHIVED USERS CHECKBOX -->
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="archive-hide">
+                <label class="form-check-label" for="archive-hide">Hide Archived Users</label>
+            </div>
+
             <div class="list-group">
                 <a href="#" class="list-group-item list-group-item-action">
                     <div class="d-flex w-100 justify-content-between">
@@ -76,7 +82,7 @@
                         </div>
                         <div class="btn-group pull-right" role="group" aria-label="user-options">
                             <button type="button" class="tick-update btn btn-outline-primary">Update</button>
-							<button type="button" class="tick-archive btn btn-outline-secondary">Archive</button>
+                            <button type="button" class="tick-archive btn btn-outline-secondary">Archive</button>
                             <button type="button" class="tick-delete btn btn-outline-secondary"><img src="images/trash.svg"/></button>
                         </div>
                     </div>
@@ -89,7 +95,7 @@
                         </div>
                         <div class="btn-group pull-right" role="group" aria-label="user-options">
                             <button type="button" class="tick-update btn btn-outline-primary">Update</button>
-							<button type="button" class="tick-archive btn btn-outline-secondary">Archive</button>
+                            <button type="button" class="tick-archive btn btn-outline-secondary">Archive</button>
                             <button type="button" class="tick-delete btn btn-outline-secondary"><img src="images/trash.svg"/></button>
                         </div>
                     </div>
@@ -145,19 +151,19 @@
         </div>
 
         <!-- logout Modal -->
-     	 <div class="modal fade" id="logoutaysModal" tabindex="-1" role="dialog" aria-labelledby="aysModalLabel" aria-hidden="true">
-     			<div class="modal-dialog" role="document">
-     					<div class="modal-content">
-     							<div class="modal-body">
+         <div class="modal fade" id="logoutaysModal" tabindex="-1" role="dialog" aria-labelledby="aysModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                                <div class="modal-body">
                        <h5>Are you sure you want to logout?</h5>
-     								</div>
-     								<div class="modal-footer">
-     									<button type="button" class="btn btn-secondary" style="float: right" data-dismiss="modal">No</button>
-     									<button type="button" class="btn btn-primary" onclick="window.location.href='index.html'">Yes</button>
-     							</div>
-     					</div>
-     			</div>
-     	 </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" style="float: right" data-dismiss="modal">No</button>
+                                        <button type="button" class="btn btn-primary" onclick="window.location.href='index.html'">Yes</button>
+                                </div>
+                        </div>
+                </div>
+         </div>
 
         <!-- JQUERY (BOOTSTRAP DEPENDENCY) -->
         <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
@@ -176,36 +182,41 @@
                 curUser = $(this).closest('a');
             });
 
-			// Archive user btn clicked
-			$(document).on('click', '.tick-archive', function(e){
-				curUser = $(this).closest('a');
-				if(curUser.hasClass('archived')){ // User is being un-archived
-					curUser.removeClass('archived');
-					$(this).text("Archive");
+            // Archive user btn clicked
+            $(document).on('click', '.tick-archive', function(e){
+                curUser = $(this).closest('a');
+                if(curUser.hasClass('archived')){ // User is being un-archived
+                    curUser.removeClass('archived');
+                    $(this).text("Archive");
 
-					$(this).before('<button type="button" class="tick-update btn btn-outline-primary">Update</button>');
-					$(this).after('<button type="button" class="tick-delete btn btn-outline-secondary"><img src="images/trash.svg"/></button>');
-				}else{ // User is being archived
-					curUser.addClass('archived');
-					$(this).text("Unarchive");
-					let deleteBtn = curUser.find('.tick-delete');
-					deleteBtn.remove();
-					let updateBtn = curUser.find('.tick-update');
-					updateBtn.remove();
-				}
-			});
+                    $(this).before('<button type="button" class="tick-update btn btn-outline-primary">Update</button>');
+                    $(this).after('<button type="button" class="tick-delete btn btn-outline-secondary"><img src="images/trash.svg"/></button>');
+                }else{ // User is being archived
+                    curUser.addClass('archived');
+                    $(this).text("Unarchive");
+                    let deleteBtn = curUser.find('.tick-delete');
+                    deleteBtn.remove();
+                    let updateBtn = curUser.find('.tick-update');
+                    updateBtn.remove();
+
+                    // If hide archived is checked -> hide element
+                    if($('#archive-hide').is(':checked')){
+                        curUser.hide();
+                    }
+                }
+            });
 
 
-			// Handle hide archived checkbox checked
-			$("#archive-hide").change(function(){
-				if($(this).is(':checked')){
-					console.log("checked");
-					$('.archived').hide();
-				}else{
-					console.log("unchecked");
-					$('.archived').show();
-				}
-			});
+            // Handle hide archived checkbox checked
+            $("#archive-hide").change(function(){
+                if($(this).is(':checked')){
+                    console.log("checked");
+                    $('.archived').hide();
+                }else{
+                    console.log("unchecked");
+                    $('.archived').show();
+                }
+            });
 
             // Update user btn clicked
             $(document).on('click', '.tick-update', function(e){
@@ -260,29 +271,20 @@
                     // Clone existing user
                     let new_user = $('.list-group-item:last').clone(true);
 
-                    // Ensure tick-delete class exists, otherwise add delete btn to list item
-                    if(!new_user.find('.tick-delete').length){
-						let btn_group = new_user.find('.btn-group');
-						btn_group.append('<button type="button" class="tick-archive btn btn-outline-secondary">Archive</button>');
-                        btn_group.append('<button type="button" class="tick-delete btn btn-outline-secondary"><img src="images/trash.svg"/></button>');
-						
-                    }
+                    // Resets all buttons, easy way to ensure new entries aren't copied from admin and users aren't already archived
+                    new_user.removeClass('archived');
+                    let buttons = new_user.find('button');
+                    buttons.remove();
 
-					// ensure user isn't accidently auto-archived
-					console.log(new_user.find('.tick-archive').text());
-					if(new_user.find('.tick-archive').text() == "Unarchive"){
-						let archiveBtn = new_user.find('tick-archive');
-						archivebtn.before('<button type="button" class="tick-update btn btn-primary">Update</button>');
-						archivebtn.after('<button type="button" class="tick-delete btn btn-secondary"><img src="images/trash.svg"/></button>');
-
-						new_user.removeClass('archived');
-					}
+                    let btnGroup = new_user.find('.btn-group');
+                    btnGroup.append('<button type="button" class="tick-update btn btn-outline-primary">Update</button>');
+                    btnGroup.append('<button type="button" class="tick-archive btn btn-outline-secondary">Archive</button>');
+                    btnGroup.append('<button type="button" class="tick-delete btn btn-outline-secondary"><img src="images/trash.svg"/></button>');
 
                     // Add new user to page
                     new_user.find('h5').text($('#cuName').val());
                     new_user.find('small').text($('#cuEmail').val());
                     new_user.appendTo('.list-group');
-
                 }
 
                 // Close modal
@@ -304,8 +306,8 @@
             });
 
             function logoutays(){
-        			$('#logoutaysModal').modal('show');
-        		}
+                    $('#logoutaysModal').modal('show');
+                }
         </script>
     </body>
 </html>
