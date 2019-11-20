@@ -285,6 +285,9 @@
                     new_user.find('h5').text($('#cuName').val());
                     new_user.find('small').text($('#cuEmail').val());
                     new_user.appendTo('.list-group');
+
+                    // Ensure new_user is visible
+                    new_user.show();
                 }
 
                 // Close modal
